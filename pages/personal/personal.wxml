@@ -1,0 +1,32 @@
+<view class='my'>
+	<view class="container3">
+		<view class="userinfo">
+			<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+			<block wx:else>
+				<image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+				<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+			</block>
+		</view>
+	</view>
+
+	<view class='my_ceter'>
+		<view class='left'>
+			<span class="iconfont icon-gsjs" style='margin-top:26rpx'></span>
+			<span class="iconfont icon-jiaruwomen1"></span>
+			<span class="iconfont icon-kefu_lr"></span>
+			<span class="iconfont icon-fabu"></span>
+		</view>
+		<view class='record' bindtap='gongsijianjie'>公司介绍<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
+		<view class='record soucang' bindtap='jiaruwomen'> 加入我们<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
+		<view class='record fabu' bindtap='viewClick'>联系客服<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
+
+		<view class='record fabu'>
+			关注公众号<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span>
+		</view>
+	</view>
+</view>
+
+<view>
+	<button class="img-plus-style zindex100 yc" open-type="contact"></button>
+	<image src="/images/icon/reply.png" class="img-plus-style"></image>
+</view>

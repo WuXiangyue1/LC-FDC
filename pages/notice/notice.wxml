@@ -1,0 +1,35 @@
+<view class='priceContainer'>
+  <!-- 标题和分割线 -->
+  <view class='priceTitle'>
+    <text>—  VR看房  —</text>
+  </view>
+  <view class='line'></view>
+</view>
+<block wx:for="{{vrList}}">
+  <view class='picTextContainer'>
+    <view class='pic'>
+      <image src="{{item.url}}" mode='widthFix'></image>
+    </view>
+    <view class='text1'>
+      <text>{{item.title}}</text>
+    </view>
+    <view class='text2'>
+      <text>{{item.brief}}</text>
+    </view>
+  </view>
+  <!-- 价格面议 -->
+  <view class='facePriceContainer'>
+    <view class='facePrice'>房子均价</view>
+    <view class='yiyuyue'>￥{{item.price}} 元/²</view>
+    <navigator class='subscribeNow' url="/pages/out/out?type=1">立即VR看房</navigator>
+  </view>
+
+  <view class='priceContainer'>
+    <!-- 标题和分割线 -->
+    <view class='line'></view>
+  </view>
+</block>
+<view>
+	<button class="img-plus-style zindex100 yc" open-type="contact"></button>
+	<image src="/images/icon/reply.png" class="img-plus-style"></image>
+</view>

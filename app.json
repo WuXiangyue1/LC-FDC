@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index1/index1",
+    "pages/mortgage/mortgage",
+    "pages/index/index",
+    "pages/fd_details/fd_details",
+    "pages/holp/holp",
+    "pages/CalculationResult/CalculationResult",
+    "pages/html/html",
+    "pages/notice/notice",
+    "pages/personal/personal",
+    "pages/search/search",
+    "pages/result/result",
+    "pages/shuifeijisuanqi/shuifeijisuanqi",
+    "pages/chuzu/chuzu",
+    "pages/out/out",
+    "pages/getPhone/getPhone",
+    "pages/reply/reply",
+    "pages/woyaomaifang/woyaomaifang",
+    "pages/weituoguanli/weituoguanli",
+    "pages/sellHouse/sellHouse",
+    "pages/zufang_detail/zufang_detail",
+    "pages/details/details"
+  ],
+  "tabBar": {
+    "selectedColor": "#b02923",
+    "color": "#666",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index1/index1",
+        "text": "首页",
+        "iconPath": "images/icon/index_A.png",
+        "selectedIconPath": "images/icon/index_B.png"
+      },
+      {
+        "pagePath": "pages/chuzu/chuzu",
+        "text": "VR看房",
+        "iconPath": "images/icon/notice_A.png",
+        "selectedIconPath": "images/icon/notice_B.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "我的",
+        "iconPath": "images/icon/personal_A.png",
+        "selectedIconPath": "images/icon/personal_B.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#b02923",
+    "navigationBarTitleText": "爱尚房",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#eeeeee"
+  },
+  "sitemapLocation": "sitemap.json"
+}

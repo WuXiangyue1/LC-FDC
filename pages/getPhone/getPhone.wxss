@@ -1,0 +1,38 @@
+page{
+  background: #fff;
+  height: 100%; 
+  overflow: hidden;
+  border-top: 1rpx solid #E0E0E0;
+}
+.login-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  height: 100%;
+  padding: 0 96rpx;
+}
+.login-header{
+  flex: 1;  
+  display: flex;
+  align-items: center;
+  margin-bottom: 100rpx;
+}
+.login-img{ 
+  width: 436rpx;
+  height: 296rpx;
+}
+.login-btn{
+  width: 100%;
+  background: #11BE84; 
+  margin-bottom: 300rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+.login-btn >image{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 30rpx;
+}

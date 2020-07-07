@@ -1,0 +1,121 @@
+<view class='top'>
+	<!--search-->
+	<view class='search'>
+		<view class='sousuo'>
+			<span class="iconfont icon-fangdajing"></span>
+			<input type="text" confirm-type="search" bindconfirm="doSearch" placeholder="请输入楼盘名称、区域或片区" style='font-size:26rpx;' />
+		</view>
+	</view>
+
+
+
+
+	<!-- 下拉菜单 -->
+	<view class='pushClick'>
+		<!-- 下拉菜单   -->
+		<view id="swiper-tab">
+			<view class="swiper-tab">
+				<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="tabNav">{{areaNmae}}
+					<span class="iconfont icon-xiala"></span>
+				</view>
+				<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="tabNav">{{price}}
+					<span class="iconfont icon-xiala"></span>
+				</view>
+				<view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="tabNav">{{type}}
+					<span class="iconfont icon-xiala"></span>
+				</view>
+
+			</view>
+			<swiper current="{{currentTab}}" duration="1000" class="swiper-item" style='display:{{displays}}'>
+				<swiper-item>
+					<view>
+						<view class='qiehuannier'>
+							<view class="nav bc_white">
+								<view class="{{selected?'red':'default'}}">中山</view>
+							</view>
+							<view id="rights">
+								<view class="{{selected?'show':'hidden'}}">
+									<view class="add_city" data-num="1" bindtap="clickArea" data-name="{{item}}" wx:for="{{ rowLise.zhongshan.name}}" wx:key="item">{{item}}</view>
+								</view>
+
+
+							</view>
+						</view>
+					</view>
+				</swiper-item>
+				<swiper-item>
+					<view class="location_bottom" hidden="">
+						<view class="{{price_num == 1?'add_citying':'add_city'}}" data-num="1" bindtap="clickPrice" data-name="不限">不限</view>
+						<view class="{{price_num == 2?'add_citying':'add_city'}}" data-num="2" bindtap="clickPrice" data-name="5000以下">5000以下</view>
+						<view class="{{price_num == 3?'add_citying':'add_city'}}" data-num="3" bindtap="clickPrice" data-name="5000-10000">5000-10000</view>
+						<view class="{{price_num == 4?'add_citying':'add_city'}}" data-num="4" bindtap="clickPrice" data-name="10000-15000">10000-15000</view>
+						<view class="{{price_num == 5?'add_citying':'add_city'}}" data-num="5" bindtap="clickPrice" data-name="15000-20000">15000-20000</view>
+						<view class="{{price_num == 6?'add_citying':'add_city'}}" data-num="6" bindtap="clickPrice" data-name="20000-25000">20000-25000</view>
+						<view class="{{price_num == 7?'add_citying':'add_city'}}" data-num="7" bindtap="clickPrice" data-name="25000-30000">25000-30000</view>
+						<view class="{{price_num == 8?'add_citying':'add_city'}}" data-num="8" bindtap="clickPrice" data-name="30000以上">30000以上</view>
+					</view>
+				</swiper-item>
+				<swiper-item>
+					<view class="location_bottom" hidden="">
+						<view class="{{type_num == 0?'add_House':'add_city'}}" data-num="0" bindtap="clickType" data-name="不限">不限</view>
+						<view class="{{type_num == 1?'add_House':'add_city'}}" data-num="1" bindtap="clickType" data-name="1室1厅">1室1厅</view>
+						<view class="{{type_num == 2?'add_House':'add_city'}}" data-num="2" bindtap="clickType" data-name="2室1厅">2室1厅</view>
+						<view class="{{type_num == 3?'add_House':'add_city'}}" data-num="3" bindtap="clickType" data-name="3室1厅">3室1厅</view>
+						<view class="{{type_num == 4?'add_House':'add_city'}}" data-num="4" bindtap="clickType" data-name="3室2厅">3室2厅</view>
+						<view class="{{type_num == 5?'add_House':'add_city'}}" data-num="5" bindtap="clickType" data-name="4室2厅">4室2厅</view>
+					</view>
+				</swiper-item>
+			</swiper>
+		</view>
+		<view class="swiper-beijing" bindtap="hideNav" style='display:{{displays}}'></view>
+	</view>
+
+	
+
+	<block wx:for="{{VRHourseList}}">
+
+	<navigator class='swiper_con' url="../zufang_detail/zufang_detail">
+		<!-- <navigator class='swiper_con' url="../out/out?url={{item.vrUrl}}"> -->
+			<!--推荐房源列表 2019年6月16日13:56:57实现： 租房列表数据渲染-->
+			<view class='tuijian_title'>
+				<view class='tuijian_left' bindtap='details'>
+					<image src='{{item.url}}'></image>
+				</view>
+				<view class='biaozhi'>此数据为模拟数据</view>
+				<view class='leixing'>新房</view>
+				<view class='xing'></view>
+				<view class='tuijian_right' bindtap='details'>
+					<view class='address'>{{item.name}} {{item.brief}}</view>
+
+					<view class='mianji'>
+						<view class='mj'>{{item.area}}㎡</view>
+						<view class='mj hu'>{{item.type}}</view>
+					</view>
+					<view class='tedian'>
+						<block wx:for="{{item.tags}}">
+							<view class='tedia te '>{{item}}</view>
+						</block>
+					</view>
+
+					<view class='salary'>
+						<span class="iconfont icon-zujin"></span>
+						<text class='sala'>{{item.price}} </text>
+						<text class='money'>元/㎡</text>
+					</view>
+
+				</view>
+			</view>
+		</navigator>
+	</block>
+
+
+
+
+
+
+
+</view>
+<view>
+	<button class="img-plus-style zindex100 yc" open-type="contact"></button>
+	<image src="/images/icon/reply.png" class="img-plus-style"></image>
+</view>

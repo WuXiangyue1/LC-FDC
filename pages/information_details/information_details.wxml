@@ -1,0 +1,24 @@
+<!--pages/information_details/information_details.wxml-->
+<view class='information_details'>
+	<view class='information_details_title'>
+		{{informationDeatils.title}}
+	</view>
+	<view class='information_details_img'>
+		<view class='img'>
+			<image src='{{informationDeatils.headUrl}}'></image>
+		</view>
+		<view class='information_details_author'>
+			<view class='author'>{{informationDeatils.author}}</view>
+			<view class='fabu_time'>{{informationDeatils.createTime}}</view>
+		</view>
+	</view>
+</view>
+<view class='content'>
+	<view class='con'>
+	{{txtContent}}
+	</view>
+</view>
+<view>
+	<button class="img-plus-style zindex100 yc" open-type="contact"></button>
+	<image src="/images/icon/reply.png" class="img-plus-style"></image>
+</view>

@@ -1,0 +1,32 @@
+<!--pages/stories/stories.wxml-->
+<view class="container1">
+   
+        <view class="page__hd">
+            <view class="page__hd-title">
+                {{title}}
+            </view>
+           
+        </view>
+        <view class="page__bd">
+        
+            <view class="article-content">
+            <image src="{{imageUrl}}"></image>
+                <text>{{txtContent}}
+                </text>
+
+  
+            </view>
+        </view>
+
+        
+        
+      
+     
+    
+  
+   
+</view>
+<view>
+	<button class="img-plus-style zindex100 yc" open-type="contact"></button>
+	<image src="/images/icon/reply.png" class="img-plus-style"></image>
+</view>

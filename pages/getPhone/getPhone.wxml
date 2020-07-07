@@ -1,0 +1,11 @@
+<view wx:if="{{canIUse}}" class='login-box'>
+  <view class='login-header'>
+    <image class='login-img' mode="aspectFill" src='/images/login_pic.png'></image>
+  </view>
+  <button class='login-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >
+    <image src='/images/icon/login_wx.png'></image>
+    微信一键登录
+  </button>
+</view>
+<view wx:else>请升级微信版本</view>
+
