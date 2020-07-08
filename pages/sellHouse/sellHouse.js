@@ -20,8 +20,9 @@ Page({
     day: '',
     tee: false,
     te: false,
-    images: [],
+ 
     imageList: [],
+    fileIds:[]
    
     
   },
@@ -54,29 +55,7 @@ Page({
 
 
   },
-  uploadImg:function(){
-    var that = this
-    // 选择图片
-    wx.chooseImage({
-      count: 8,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths);
-        //拼接之前存在的图片
-        that.setData({
-          images: that.data.images.concat(tempFilePaths)
-        })
-       
-
-      },
-      fail: e => {
-        console.error(e)
-      }
-    })
-  },
+ 
 
   previewImg:function(e){
     console.log(e)
@@ -107,32 +86,73 @@ Page({
   },
 
   formSubmit:function(e){
+    
     var time = this.data.time
     console.log(e)
     var message = e.detail.value
-    db.collection('sellHouse').add({
-      data:{
-        phone:message.phone,
-        name:message.name,
-        local:message.local,
-        floor:message.floor,
-        price:message.price,
-        type:message.type,
-        area:message.area,
-        renovation:message.renovation,
-        time:time
-      },
-      success: res =>{
-        wx.showToast({
-          title: '委托成功',
-        })
-      },
-      fail: err =>{
-        wx.showToast({
-          title: '提交失败，请电话联系',
-        })
-      }
+    //上传图片到云存储
+    wx.showLoading({
+      title: '上传中~',
     })
+    let promiseArr = []
+    for(let i=0;i<this.data.imageList.length;i++){
+      promiseArr.push(new Promise((reslove,reject)=>{
+        let item = this.data.imageList[i];
+        let suffix = /\.\w+$/.exec(item)[0]; //正则表达式，返回文件扩展名
+        wx.cloud.uploadFile({
+          cloudPath: 'test/'+new Date().getTime() + suffix, // 上传至云端的路径
+          filePath: item, // 小程序临时文件路径
+          success: res => {
+            // 返回文件 ID
+            console.log(res.fileID)
+            this.setData({
+              fileIds: this.data.fileIds.concat(res.fileID)
+            })
+            reslove()
+          },
+          fail: err=>{
+            wx.hideLoading()
+            wx.showModal({
+              title: '上传失败',
+              content: err,
+            })
+          }
+        })
+
+      }))
+    }
+    Promise.all(promiseArr).then(res =>{
+
+      console.log("图片上传完毕，执行数据库操作")
+      db.collection('sellHouse').add({
+        data: {
+          phone: message.phone,
+          name: message.name,
+          local: message.local,
+          floor: message.floor,
+          price: message.price,
+          type: message.type,
+          area: message.area,
+          renovation: message.renovation,
+          time: time,
+          fileIds:this.data.fileIds
+        },
+        success: res => {
+          wx.hideLoading();
+          wx.showToast({
+            title: '委托成功',
+          })
+        },
+        fail: err => {
+          wx.hideLoading();
+          wx.showToast({
+            title: '提交失败，请电话联系',
+          })
+        }
+      })
+    })
+   
+   
   },
 
   getTime:function(){
@@ -181,7 +201,7 @@ Page({
  
     // 选择图片
     wx.chooseImage({
-      count: 8 - imageList.length,
+      count: 6 - imageList.length,
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function(res) {

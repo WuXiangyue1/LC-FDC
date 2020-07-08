@@ -74,16 +74,16 @@
 
 	<block wx:for="{{VRHourseList}}">
 
-	<navigator class='swiper_con' url="../zufang_detail/zufang_detail">
+	<navigator class='swiper_con' url="../zufang_detail/zufang_detail?id={{item._id}}">
 		<!-- <navigator class='swiper_con' url="../out/out?url={{item.vrUrl}}"> -->
 			<!--推荐房源列表 2019年6月16日13:56:57实现： 租房列表数据渲染-->
 			<view class='tuijian_title'>
 				<view class='tuijian_left' bindtap='details'>
-					<image src='{{item.url}}'></image>
+					<image  mode="aspectFill" src='{{item.picUrls[0]}}'></image>
 				</view>
-				<view class='biaozhi'>此数据为模拟数据</view>
-				<view class='leixing'>新房</view>
-				<view class='xing'></view>
+				<!-- <view class='biaozhi'>此数据为模拟数据</view> -->
+				<!-- <view class='leixing'>新房</view>
+				<view class='xing'></view> -->
 				<view class='tuijian_right' bindtap='details'>
 					<view class='address'>{{item.name}} {{item.brief}}</view>
 

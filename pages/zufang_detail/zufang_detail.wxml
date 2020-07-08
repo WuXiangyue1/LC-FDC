@@ -1,7 +1,7 @@
 <!--pages/zufang_detail/zufang_detail.wxml-->
 <!--pages/details/details.wxml-->
 <!--slider-->
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+<swiper indicator-dots="false" autoplay="true" interval="3000" duration="1000" circular="true">
 	<block wx:for="{{imgArr}}" wx:key="index">
 		<swiper-item>
 			<image class='slide' src="{{item}}" bindtap='previewImg' data-index='{{index}}'></image>
@@ -18,27 +18,27 @@
 	<!-- <span class="iconfont icon-fangyuan_tupianzaizu"></span> -->
 	<!--<text class='other_name'>别名：{{other_name}}</text>-->
 	<view class='peitao'>
-		<view class='raduce' style='background:#FCF1DF;color:#F0C07D;'>{{other[0]}}</view>
-		<view class='raduce' style='background:#FCE4E0;color:#FE7F78;margin-left: 2%;'>{{other[1]}}</view>
-		<view class='raduce' style='background:#E3F3FD;color:#72B9F6;margin-left: 2%;'>{{other[2]}}</view>
+		<view class='raduce' style='background:#FCF1DF;color:#F0C07D;'>{{tags[0]}}</view>
+		<view class='raduce' style='background:#FCE4E0;color:#FE7F78;margin-left: 2%;'>{{tags[1]}}</view>
+		<view class='raduce' style='background:#E3F3FD;color:#72B9F6;margin-left: 2%;'>{{tags[2]}}</view>
 	</view>
 	<!--项目情况-->
 	<view class='zufang'>
 		<view class='zujin'>
 			<view>价格</view>
-			<view class='zujia'>{{prices}}</view>
+			<view class='zujia'>{{information.price}}/m²</view>
 		</view>
 		<view class='zujin'>
 			<view>户型</view>
-			<view class='zujia'>{{huxing}}</view>
+			<view class='zujia'>{{information.type}}</view>
 		</view>
 		<view class='mianji'>
 			<view>建筑面积</view>
-			<view class='zujia'>{{mianji}}</view>
+			<view class='zujia'>{{information.area}}/m²</view>
 		</view>
 	</view>
-	<text class='other_name'>装修情况：<text style='color:orangered'>{{leixing}}</text></text>
-	<text class='other_name'>小区名称：<text style='color:black'>{{other_name}}</text></text>
+	<text class='other_name'>装修情况：<text style='color:orangered'>{{information.decoration}}</text></text>
+	<text class='other_name'>小区名称：<text style='color:black'>{{information.name}}</text></text>
 </view>
 
 <!-- 户型图 -->
@@ -71,22 +71,22 @@
 	<text class='title'>基本信息</text>
 	<!-- <text class='other_name'>开发商：<text style='color:black'>{{kfs}}</text></text>
 <text class='other_name'>物业公司：<text style='color:black'>{{wygs}}</text></text>-->
-	<text class='other_name'>房屋情况：<text style='color:black'>全明户型，采光，居住舒服</text></text>
-	<text class='other_name1'>均   价：<text style='color:black'>13000</text>元/㎡</text>
-	<text class='other_name1'>区   域：<text style='color:black'>中山石歧</text></text>
-	<text class='other_name1'>装修情况：<text style='color:black'>毛胚</text></text>
-	<text class='other_name1'>房屋朝向：<text style='color:black'>坐北朝南</text></text>
-	<text class='other_name1'>容 积 率 ：<text style='color:black'>{{rjl}}</text></text>
-	<text class='other_name1'>绿 化 率 ：<text style='color:black'>{{lhl}}</text></text>
-	<text class='other_name1'>车位情况：<text style='color:black'>无车位</text></text>
-	<text class='other_name1'>物 管 费：<text style='color:black'>{{zwzs}}</text></text>
+	<text class='other_name'>简介：<text style='color:black'>{{information.brief}}</text></text>
+	<text class='other_name1'>使用年限：<text style='color:black'>{{information.houseYear}}</text>年</text>
+	<text class='other_name1'>区   域：<text style='color:black'>{{information.local}}</text></text>
+	<text class='other_name1'>电梯情况：<text style='color:black'>{{information.elevator}}</text></text>
+	<text class='other_name1'>房屋朝向：<text style='color:black'>{{information.orientation}}</text></text>
+	<text class='other_name1'>容 积 率 ：<text style='color:black'>{{information.volumeRate}}</text></text>
+	<text class='other_name1'>绿 化 率 ：<text style='color:black'>{{information.greenRate}}</text></text>
+	<text class='other_name1'>车位情况：<text style='color:black'>{{information.car}}</text></text>
+	<text class='other_name1'>物 管 费：<text style='color:black'>{{information.management}}</text></text>
 </view>
 
 <!-- 项目简介 -->
 <view class="xmjj {{ellipsis?'ellipsis':'unellipsis'}}" style='margin-top:20rpx;'>
 	<text class='title'>房源描述</text>
 	<view class="context">
-		<text>{{jianjie}}</text>
+		<text>{{txtContent}}</text>
 	</view>
 	<view bindtap='ellipsis' class='show'>
 		<image class='img-ellipsis' src="{{ellipsis?'image/ellipsis.png':'image/unellipsis.png'}}"></image>
@@ -101,7 +101,7 @@
 	<text class='clickmap' style='font-size:24rpx;'>(点地图)</text>
 	<view class='ditu'>
 		<!-- map.wxml -->
-		<image bindtap='getLocation' src='/images/ditu.jpg'></image>
+		<image bindtap='getLocation' src='{{information.mapUrl}}'></image>
 	</view>
 </view>
 <!--房源数据推荐位置-->
@@ -118,7 +118,7 @@
 		<image class='xin' src="{{isShow?'./image/xin1.png':'./image/xin.png'}}" data-sid="{{sid}}"></image>
 		<text class='sc'>{{isShow?"收藏":"已收藏"}}</text>
 	</view>
-	<view class='phone iconfont icon-dianhua' bindtap='zufang_detail'>VR看房</view>
+	<navigator class='phone iconfont icon-dianhua' url="../out/out?url={{information.vrUrl}}">VR看房</navigator>
 </view>
 <view>
 	<button class="img-plus-style zindex100 yc" open-type="contact"></button>

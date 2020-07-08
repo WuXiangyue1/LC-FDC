@@ -1,48 +1,21 @@
-// pages/details/details.js
+const db = wx.cloud.database()
 const app = getApp()
 Page({
   data: {
+    //swiper参数
     ellipsis: true,
-    name: '',
-    address: '',
-    latitude: '',
-    longitude: '',
-    imgArr: ["cloud://lc-123.6c63-lc-123-1302387095/fdc/head-images/f1.jpg","cloud://lc-123.6c63-lc-123-1302387095/fdc/head-images/f2.jpg"],
-    imgHuxingArr: [
-      'http://pic2.to8to.com/home/a6/b1/a6b103eade4ff7f146ada6200a445c08_s.jpg',
-    ],
-    indicatorDots: false,
-    autoplay: true,
-    interval: 3000,
-    duration: 1000,
-    circular: true,
-    tit: '',
-    zhuangtai: '急租',
-    other_name: '紫岭国际',
-    other: ["采光好","交通便利","近商圈"],
-    prices: '13000/m²',
-    leixing: '全新毛胚未入住',
-    xiangmu: '观山湖区 北二环',
-    huxing: '三房两厅',
-    mianji: '100m²',
-    kfs: '中山市越秀地产开发有限公司',
-    wygs: '广州市越秀物业管理有限公司',
-    jzlx: '塔板结合',
-    kprq: '',
-    jlrq: '',
-    cqnx: '',
-    zdmj: '',
-    rjl: '暂无数据',
-    lhl: '暂无数据',
-    wyzs: '',
-    zwzs: '可协商',
-    jianjie: '1.房东诚心出售，看房方便，2.超正户型，朝向：南北，全明户型，采光，居住舒服，3.小区景色优美，视野开阔，物业高端，安全省心4.小区周边交通便利，生活配套设施齐全：附近有大型、超市，农贸市场，幼儿园、也就在小区周边，生活十分便利',
+    // indicatorDots: false,
+    // autoplay: true,
+    // interval: 3000,
+    // duration: 1000,
+    // circular: true,
+  
+    
     collectData:'',
-    bac: 'http://a3.qpic.cn/psb?/V14a5AtA1zaehb/AVslTQ*T7L*jRb9psfDGQxNU8QxXL8E00tInfVxptcc!/m/dLYAAAAAAAAAnull&bo=yADIAAAAAAADByI!&rf=photolist&t=5',
     soucang: '收藏',
-    a: 0,
-    imgHuxingArr:['cloud://lc-123.6c63-lc-123-1302387095/test/2.jpg','cloud://lc-123.6c63-lc-123-1302387095/test/1.jpg','cloud://lc-123.6c63-lc-123-1302387095/test/2.jpg'],
-    address:"中山市电子科技大学中山学院"
+    address:"",
+    information:"",
+    imgArr:[]
  
 
 
@@ -93,16 +66,7 @@ Page({
       complete: function (res) { },
     })
   },
-  previewImgs:function(){
-    var images = ['cloud://lc-123.6c63-lc-123-1302387095/timg.jpg']
-    wx.previewImage({
-      current: 'cloud://lc-123.6c63-lc-123-1302387095/timg.jpg',     //当前图片地址
-      urls: images,               //所有要预览的图片的地址集合 数组形式
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
+
   previewHuxingImg: function (e) {
     console.log(e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
@@ -138,6 +102,7 @@ Page({
       collectData: id
     })
     that.getCollected();
+    that.getInformationById(id)
    
     
        
@@ -163,12 +128,6 @@ Page({
       // 当然不设置false，它默认也是false，未选中的状态
       wx.setStorageSync("_collect", CollectState);
     }
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
   getLocation: function () {
     var that = this;
@@ -229,40 +188,51 @@ Page({
       });
     }
     },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+
+  getInformationById(id){
+    var that = this
+    db.collection('VRList').where({
+      _id: id 
+    }).get({
+      success(res){
+        console.log("information:",res.data)
+        that.setData({
+          information:res.data[0],
+          address:res.data[0].address,
+          imgArr:res.data[0].picUrls,
+          tags:res.data[0].tags,
+          imgHuxingArr:res.data[0].houseUrls,
+        })
+        that.readTxt(res.data[0].txtUrl)
+      },
+      fail(err){
+        console.log("err fail",err)
+      }
+    })
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
 
+  readTxt:function(url){
+   //读取txt文件
+   wx.cloud.downloadFile({
+    fileID:url
+  }).then(res =>{
+    var that = this
+    console.log(res)
+    var fs = wx.getFileSystemManager()
+    var result = fs.readFileSync(res.tempFilePath,"utf-8")
+  
+    that.setData({
+      txtContent:result,
+    })
+  }).catch(error =>{
+    console.log(error)
+  })
   },
+ 
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
+ 
 
   /**
    * 用户点击右上角分享
@@ -273,7 +243,7 @@ Page({
     }
     var me = this;
     return {
-      title: '尚居乐',
+      title: '爱尚房',
       path: "pages/index1/index1"
     }
   }

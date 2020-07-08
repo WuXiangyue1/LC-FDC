@@ -84,7 +84,7 @@
   <!-- 表单收集结束 -->
 
  <view class="row-voucher b-f m-top20">
-      <view class="row-title">上传凭证 (最多8张)</view>
+      <view class="row-title">上传凭证 (最多6张)</view>
       <view class="image-list">
         <!-- 图片列表 -->
         <view class="image-preview" wx:for="{{imageList}}" wx:for-index="imageIndex" wx:for-item="imagePath" wx:key="this">
