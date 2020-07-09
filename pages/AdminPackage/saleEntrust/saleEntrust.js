@@ -571,13 +571,13 @@ Page({
 
     // 提交信息前进行数据校验
     Submit(e) {
-        let ImgList = this.data.imgList
+        let ImgList1 = this.data.imgList1
+        let ImgList2 = this.data.imgList2
+        let ImgList3 = this.data.imgList3
+
         let FormData = this.data.FormData
-        let InputList = this.data.InputList
-        // 计算平均价格
-        let averagePrice = (FormData['totalPrice'] * 10000 / FormData['area']).toFixed(2)
-        console.log('averagePrice', averagePrice)
-        FormData['averagePrice'] = averagePrice
+       
+       
         // 表单数据的校验
         for (let key in FormData) {
             if (FormData[key] == '') {
@@ -589,32 +589,6 @@ Page({
                 })
                 return;
             }
-        }
-
-        console.log(ImgList.length)
-
-        // 图片的校验
-        // 图片为空时报错
-        if (ImgList.length == 0) {
-            wx.hideLoading()
-            wx.showToast({
-                title: '图片不能为空,最少需要一张',
-                icon: 'none',
-                mask: true,
-                duration: 2000
-            })
-            return;
-        }
-        // 图片超过四张保错
-        if (ImgList.length > 4) {
-            wx.hideLoading()
-            wx.showToast({
-                title: '图片不能超过四张',
-                icon: 'none',
-                mask: true,
-                duration: 2000
-            })
-            return;
         }
 
         this.setData({
