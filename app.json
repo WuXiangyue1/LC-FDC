@@ -20,7 +20,10 @@
     "pages/weituoguanli/weituoguanli",
     "pages/sellHouse/sellHouse",
     "pages/zufang_detail/zufang_detail",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/AdminPackage/managerHome/managerHome",
+    "pages/AdminPackage/scanPage/scanPage",
+    "pages/AdminPackage/saleEntrust/saleEntrust"
   ],
   "tabBar": {
     "selectedColor": "#b02923",

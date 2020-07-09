@@ -7,14 +7,11 @@ Page({
     phonenum: "13726272948",
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // 点击次数记录
+    TapAccount: 0
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: ''
-    })
-  },
+
   gongsijianjie: function () {
     wx.navigateTo({
       url: '/pages/gongsijianjie/gongsijianjie'
@@ -54,6 +51,72 @@ Page({
       })
     }
   },
+
+   // 秘密入口
+   ScanPage() {
+    let TapAccount = this.data.TapAccount
+    TapAccount = TapAccount + 1
+    console.log(TapAccount)
+    if (TapAccount < 5) {
+        this.setData({
+            TapAccount: TapAccount
+        })
+    } else {
+        // 检查管理员身份
+        this.IsAdminstator()
+    }
+},
+
+
+ // 检查是否为管理员
+ IsAdminstator() {
+  wx.showLoading({
+      title: '正在检验...',
+      mask: true
+  })
+  let that = this
+  wx.cloud.callFunction({
+      name: 'InitInfo',
+      data: {
+          type: 'ADMIN'
+      },
+      success: res => {
+          wx.hideLoading()
+          console.log('adminres', res)
+          if (res.result.total > 0) {
+              that.setData({
+                  Adminstator: true
+              })
+              console.log("app.globalData.userInfo",app.globalData.userInfo)
+              // 管理员跳转到管理员页面
+              var url = '../AdminPackage/managerHome/managerHome'
+              var title = '进入管理员页面'
+              var id = app.globalData.userInfo.nickName
+          } else {
+              // 不是管理员，跳转到扫码页面
+              var url = '../AdminPackage/scanPage/scanPage'
+              var title = '扫码'
+              var id = 'mypage'
+          }
+
+          wx.showToast({
+              title: title,
+              icon: 'none'
+          })
+          that.setData({
+              TapAccount: 0
+          })
+          wx.navigateTo({
+              url: `${url}?id=${id}`,
+              
+          })
+      },
+      fail: err => {
+          wx.hideLoading()
+          console.log('err', err)
+      }
+  })
+},
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -103,7 +166,7 @@ Page({
       }
       var me = this;
       return {
-        title: '尚居乐',
+        title: '爱尚房',
         path: "pages/index1/index1"
       }
     }

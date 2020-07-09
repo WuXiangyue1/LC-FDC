@@ -1,6 +1,6 @@
 <!--pages/details/details.wxml-->
 <!--slider-->
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+<swiper indicator-dots="false" autoplay="true" interval="3000" duration="1000" circular="true">
 	<block wx:for="{{imgArr}}" wx:key="index">
 		<swiper-item>
 			<image class='slide' src="{{item}}" bindtap='previewImg' data-index='{{index}}'></image>
@@ -11,17 +11,18 @@
 <!-- 2019年6月19日11:01:55 -->
 <!-- 具体位置详情 -->
 <view class='dizhi'>
-	<text class='title'>{{tit}}</text>
+	<text class='title'>{{information.name}}</text>
 	<span class="iconfont icon-fangyuan_zaishou"></span>
 	<text class='other_name'></text>
 	<view>
-		<text class='raduce' style='background:#FCF1DF;color:#F0C07D;'>{{other[0]}}</text>
-		<text class='raduce' style='background:#FCE4E0;color:#FE7F78'>{{other[1]}}</text>
-		<text class='raduce' style='background:#E3F3FD;color:#72B9F6'>{{other[2]}}</text>
+		<text class='raduce' style='background:#FCF1DF;color:#F0C07D;'>优惠打折</text>
+		<text class='raduce' style='background:#FCE4E0;color:#FE7F78'>小户型</text>
+		<text class='raduce' style='background:#E3F3FD;color:#72B9F6'>低总价</text>
 	</view>
-	<text class='other_name'>楼房均价：<text style='color:orangered'>{{prices}}</text></text>
-	<text class='other_name'>格局户型：<text style='color:black'>95m²-123m² 3至4房</text></text>
-	<text class='other_name'>小区配套：<text style='color:black'>社区公园、健身设施、游泳池</text></text>
+	<text class='other_name'>楼房均价：<text style='color:orangered'>{{information.price}}元/m²</text></text>
+	<text class='other_name'>格局户型：<text style='color:black'>{{information.area}}m²  {{information.type}}</text></text>
+	<text class='other_name'>小区配套：<text style='color:black'>{{tags[0]}}、{{tags[1]}}、{{tags[2]}}
+  </text></text>
 </view>
 
 <!-- 户型图 -->
@@ -39,23 +40,23 @@
 <!-- 2019年6月19日11:57:38 -->
 <view class='dizhi1' style='margin-top:20rpx'>
 	<text class='title'>楼盘参数</text>
-	<text class='other_name'>开发商：<text style='color:black'>中山市越秀地产开发有限公司</text></text>
-	<text class='other_name'>物业公司：<text style='color:black'>广州市越秀物业管理有限公司</text></text>
-	<text class='other_name'>最高楼层：<text style='color:black'>30层</text></text>
-	<text class='other_name1'>开盘日期：<text style='color:black'>2018/04/11</text></text>
-	<text class='other_name1'>建筑面积：<text style='color:black'>533000m²</text></text>
-	<text class='other_name1'>产权年限：<text style='color:black'>60年</text></text>
-	<text class='other_name1'>占地面积：<text style='color:black'>233000m²</text></text>
-	<text class='other_name1'>容 积 率 ：<text style='color:black'>2.5</text></text>
-	<text class='other_name1'>绿 化 率 ：<text style='color:black'>35％</text></text>
-	<text class='other_name1'>物业费用：<text style='color:black'>2.9元/m²/月</text></text>
-	<text class='other_name1'>车位总数：<text style='color:black'>{{zwzs}}</text></text>
+	<text class='other_name'>开发商：<text style='color:black'>{{information.developers}}</text></text>
+	<text class='other_name'>物业公司：<text style='color:black'>{{information.propertyCompany}}</text></text>
+	<text class='other_name'>最高楼层：<text style='color:black'>{{information.floor}}层</text></text>
+	<text class='other_name1'>开盘日期：<text style='color:black'>{{information.openDate}}</text></text>
+	<text class='other_name1'>建筑面积：<text style='color:black'>{{information.builtArea}}m²</text></text>
+	<text class='other_name1'>产权年限：<text style='color:black'>{{information.year}}</text></text>
+	<text class='other_name1'>占地面积：<text style='color:black'>{{information.coveredArea}}m²</text></text>
+	<text class='other_name1'>容 积 率 ：<text style='color:black'>{{information.volumeRate}}</text></text>
+	<text class='other_name1'>绿 化 率 ：<text style='color:black'>{{information.greenRate}}%</text></text>
+	<text class='other_name1'>物业费用：<text style='color:black'>{{information.management}}元/m²/月</text></text>
+	<text class='other_name1'>车位总数：<text style='color:black'>{{information.car}}</text></text>
 </view>
 
 <!-- 项目简介 -->
 <view class="xmjj {{ellipsis?'ellipsis':'unellipsis'}}" style='margin-top:20rpx;'>
 	<text class='title'>房源描述</text>
-	<view class="context"><text >{{jianjie}}</text></view>
+	<view class="context"><text >{{txtContent}}</text></view>
 	<view bindtap='ellipsis' class='show'>
 		<image class='img-ellipsis' src="{{ellipsis?'../zufang_detail/image/ellipsis.png':'../zufang_detail/image/unellipsis.png'}}"></image>
 	</view>
@@ -69,7 +70,7 @@
 	<text class='clickmap' style='font-size:24rpx;'>(点地图)</text>
 	<view class='ditu'>
 		<!-- map.wxml -->
-		<image bindtap='getLocation' src='/images/ditu.jpg'></image>
+		<image bindtap='getLocation' src='{{information.mapUrl}}'></image>
 	</view>
 </view>
 <!--房源数据推荐位置-->
@@ -83,8 +84,11 @@
 
 <view class='last'>
 	<view class="shoucang" bindtap='shoucang'>
-		<view class='xin' style="background-image:url('{{bac}}')"></view>
-		<text class='sc'>{{soucang}}</text>
+		<image class='xin' src="{{isShow?'/images/xin1.png':'/images/xin.png'}}" data-sid="{{sid}}"></image>
+		<text class='sc'>{{isShow?"收藏":"已收藏"}}</text>
 	</view>
-	<view class='phone iconfont ' bindtap='goVR'> VR看房</view>
+	<navigator class='phone iconfont ' url="../out/out?url={{information.vrUrl}}"> VR看房</navigator>
 </view>
+<button class="img-plus-style zindex100 yc" open-type="contact"></button>
+	<image src="/images/icon/reply.png" class="img-plus-style"></image>
+

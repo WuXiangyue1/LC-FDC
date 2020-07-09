@@ -94,7 +94,7 @@
 		<view class="noticeList bg-white">
 
 			<!-- <navigator class="noticeList-item" url="../html/html?name={{item.name}}"> -->
-      <navigator class="noticeList-item" url="../details/details">
+      <navigator class="noticeList-item" url="../details/details?id={{item._id}}">
 				<image src="{{item.url}}" style="width:112px;height:68px;"></image>
 				<view class="noticeList-item-r">
 					<text class="noticeList-item-title">{{item.name}}</text>

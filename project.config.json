@@ -9,6 +9,7 @@
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -24,7 +25,6 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"preloadBackgroundData": false,
 		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
@@ -214,6 +214,34 @@
 					"id": -1,
 					"name": "pages/chuzu/chuzu",
 					"pathName": "pages/chuzu/chuzu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/personal/personal",
+					"pathName": "pages/personal/personal",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/managerHome/managerHome",
+					"pathName": "pages/AdminPackage/managerHome/managerHome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/managerHome/managerHome",
+					"pathName": "pages/AdminPackage/managerHome/managerHome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/saleEntrust/saleEntrust",
+					"pathName": "pages/AdminPackage/saleEntrust/saleEntrust",
 					"scene": null
 				}
 			]

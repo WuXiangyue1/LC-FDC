@@ -1,0 +1,43 @@
+<view class="conment">
+
+	<view class="admin">
+		<view class="size  iconfont icon-shangchuan">
+			<text class="font">上传楼盘</text>
+		</view>
+
+		<view class="size  iconfont icon-shangchuan">
+			<text class="font">上传房源</text>
+		</view>
+
+		<view class="size iconfont icon-shangchuan">
+			<text class="font ">上传txt</text>
+		</view>
+
+		<view class="size  iconfont icon-shouye">
+			<text class="font ">首页轮播</text>
+		</view>
+
+		<view class="size iconfont  icon-yuangongguanlizhengjianxueshengzhenggongzuozheng">
+			<text class="font ">员工管理</text>
+		</view>
+
+		<view class="size iconfont icon-zixun">
+			<text class="font ">资讯管理</text>
+		</view>
+
+		<view class="size iconfont icon-guanliyuan">
+			<text class="font">设置管理员</text>
+		</view>
+
+
+
+		<view class="size iconfont icon-ziyuan">
+			<text class="font">楼盘管理</text>
+		</view>
+
+		<view class="size iconfont icon-ziyuan">
+			<text class="font">房源管理</text>
+		</view>
+
+	</view>
+</view>
