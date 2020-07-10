@@ -23,7 +23,9 @@
     "pages/details/details",
     "pages/AdminPackage/managerHome/managerHome",
     "pages/AdminPackage/scanPage/scanPage",
-    "pages/AdminPackage/saleEntrust/saleEntrust"
+    "pages/AdminPackage/saleEntrust/saleEntrust",
+    "pages/AdminPackage/managerAdmin/managerAdmin",
+    "pages/AdminPackage/component/qrcode/qrcode"
   ],
   "tabBar": {
     "selectedColor": "#b02923",

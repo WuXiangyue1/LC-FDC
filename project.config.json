@@ -242,6 +242,20 @@
 					"id": -1,
 					"name": "pages/AdminPackage/saleEntrust/saleEntrust",
 					"pathName": "pages/AdminPackage/saleEntrust/saleEntrust",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/managerHome/managerHome",
+					"pathName": "pages/AdminPackage/managerHome/managerHome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/managerAdmin/managerAdmin",
+					"pathName": "pages/AdminPackage/managerAdmin/managerAdmin",
 					"scene": null
 				}
 			]

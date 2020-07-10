@@ -10,6 +10,9 @@ Page({
      * 页面的初始数据
      */
     data: {
+      fileIds1:[],
+      fileIds2:[],
+      fileIds3:[],
        
 
         // 渲染输入框
@@ -571,32 +574,59 @@ Page({
 
     // 提交信息前进行数据校验
     Submit(e) {
-        let ImgList1 = this.data.imgList1
-        let ImgList2 = this.data.imgList2
-        let ImgList3 = this.data.imgList3
+      var that = this
+      new Promise(function (resolve,reject){
+       
+        that.upload1(resolve)
+        that.upload2(resolve)
+        that.upload3(resolve)
+       }).then(function(){
+         
+         console.log("开始执行数据库操作")
+
+         console.log(that.data.fileIds1)
+         console.log(that.data.fileIds2)
+         console.log(that.data.fileIds3)
+       })
 
         let FormData = this.data.FormData
        
        
         // 表单数据的校验
-        for (let key in FormData) {
-            if (FormData[key] == '') {
-                wx.showToast({
-                    title: '请把所有数据填写完整',
-                    icon: 'none',
-                    mask: true,
-                    duration: 2000
-                })
-                return;
-            }
-        }
+        // for (let key in FormData) {
+        //     if (FormData[key] == '') {
+        //         wx.showToast({
+        //             title: '请把所有数据填写完整',
+        //             icon: 'none',
+        //             mask: true,
+        //             duration: 2000
+        //         })
+        //         return;
+        //     }
+        // }
 
         this.setData({
             FormData: FormData
         })
+        
+
 
         // 上传图片
-        this.UploadImages()
+     
+      //上传地图照片
+     
+      //上传封面
+     
+       //上传户型
+    
+      //上传txt
+   
+
+      
+
+
+
+        //this.UploadImages()
     },
 
 
@@ -715,11 +745,129 @@ Page({
               console.log(res)
               console.log("tempFilePaths",tempFilePaths)
               that.setData({
+                txtUrl: tempFilePaths,
                 txtName:res.tempFiles[0].name
               })
             }
           })
       },
+
+
+
+  upload1(resolve){
+        // 上传图片
+        let imgList1 = this.data.imgList1
+        
+        //上传地图照片
+        for (let i = 0; i < imgList1.length; i++) {
+          let item = imgList1[i];
+          let suffix = /\.\w+$/.exec(item)[0];//正则表达式返回文件的扩展名
+          wx.cloud.uploadFile({
+            cloudPath: 't1/' + new Date().getTime() + suffix, // 上传至云端的路径
+            filePath: item, // 小程序临时文件路径
+            success: res => {
+              // 返回文件 ID
+              console.log(res.fileID)
+              this.setData({
+                fileIds1: this.data.fileIds1.concat(res.fileID)
+              })
+              
+
+            },
+            fail: err => {
+              wx.hideLoading()
+              wx.showModal({
+                title: '上传失败',
+                content: err,
+              })
+            }
+          })
+        }
+   
+
+
+   
+
+
+      },
+
+  upload2(resolve) {
+    // 上传图片
+    let imgList2 = this.data.imgList2
+
+    //上传地图照片
+    for (let i = 0; i < imgList2.length; i++) {
+      let item = imgList2[i];
+      let suffix = /\.\w+$/.exec(item)[0];//正则表达式返回文件的扩展名
+      wx.cloud.uploadFile({
+        cloudPath: 't2/' + new Date().getTime() + suffix, // 上传至云端的路径
+        filePath: item, // 小程序临时文件路径
+        success: res => {
+          // 返回文件 ID
+
+          this.setData({
+            fileIds2: this.data.fileIds2.concat(res.fileID)
+          })
+          console.log(res.fileID)
+        
+
+        },
+        fail: err => {
+          wx.hideLoading()
+          wx.showModal({
+            title: '上传失败',
+            content: err,
+          })
+        }
+      })
+    }
+    
+
+
+    console.log("2222")
+
+
+  },
+
+
+  upload3(resolve) {
+    // 上传图片
+    let imgList3 = this.data.imgList3
+
+    //上传地图照片
+       
+    for (let i = 0; i < imgList3.length; i++) {
+      let item = imgList3[i];
+      let suffix = /\.\w+$/.exec(item)[0];//正则表达式返回文件的扩展名
+      wx.cloud.uploadFile({
+        cloudPath: 't3/' + new Date().getTime() + suffix, // 上传至云端的路径
+        filePath: item, // 小程序临时文件路径
+        success: res => {
+          // 返回文件 ID
+
+          this.setData({
+            fileIds3: this.data.fileIds3.concat(res.fileID)
+          })
+          console.log(res.fileID)
+         
+
+        },
+        fail: err => {
+          wx.hideLoading()
+          wx.showModal({
+            title: '上传失败',
+            content: err,
+          })
+        }
+      })
+    }
+
+   
+
+   
+
+
+  },
 
     
 

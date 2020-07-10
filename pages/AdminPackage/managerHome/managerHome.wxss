@@ -19,7 +19,7 @@
 }
 .size{
   background-color: white;
-  width: 248rpx;
+  width: 246rpx;
   height: 200rpx;
   display: flex;
   flex-direction: column;

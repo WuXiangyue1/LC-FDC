@@ -1,5 +1,4 @@
-// pages/AdminPackage/managerHome/managerHome.js
-
+// pages/AdminPackage/component/qrcode/qrcode.js
 Page({
 
   /**
@@ -63,16 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  go(){
-    console.log("111")
-    wx.navigateTo({
-      url: '../saleEntrust/saleEntrust',
-    })
-  },
-  goAdmin(){
-    wx.navigateTo({
-      url: '../managerAdmin/managerAdmin',
-    })
   }
 })

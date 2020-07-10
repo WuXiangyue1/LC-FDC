@@ -19,7 +19,7 @@ exports.main = async (event, context) => {
 
     // 获取管理员权限级别
     if (event.type === 'adminInfo') {
-        let res = await db.collection('AdminStator').where({
+        let res = await db.collection('adminStator').where({
             '_openid': openId
         }).field({
             'name': true,
@@ -30,12 +30,12 @@ exports.main = async (event, context) => {
 
     // 获取管理员列表
     if (event.type === 'AdminList') {
-        let count = await db.collection('AdminStator').where({
+        let count = await db.collection('adminStator').where({
             '_openid': openId
         }).count()
         // 再次验证是否为管理员
         if (count.total) {
-            var res = await db.collection('AdminStator').orderBy('level', 'asc').get()
+            var res = await db.collection('adminStator').orderBy('level', 'asc').get()
         } else {
             var res = {
                 'data': []
@@ -61,11 +61,11 @@ exports.main = async (event, context) => {
                     stats: true
                 }
             })
-        // let total = await db.collection('AdminStator').where({ '_openid': openId }).count()
+        // let total = await db.collection('adminStator').where({ '_openid': openId }).count()
         // 更新成功，添加管理员
         if (ChangeStats.stats.updated) {
             // 添加管理员
-            let add = await db.collection('AdminStator')
+            let add = await db.collection('adminStator')
                 .add({
                     data: {
                         _openid: openId,
@@ -112,14 +112,14 @@ exports.main = async (event, context) => {
 
     // 删除管理员
     if (event.type === 'delete-admin') {
-        let info = await db.collection('AdminStator').where({
+        let info = await db.collection('adminStator').where({
             '_openid': openId
         }).get()
         // 再次验证是否为超级管理员
         if (info.data[0].level === 0) {
             // 检查需要删除的管理员的openid是否与自己的相同
             if (event.openid != openId) {
-                var remove = await db.collection('AdminStator')
+                var remove = await db.collection('adminStator')
                     .where({
                         _id: event.ID,
                         _openid: event.openid,
@@ -148,7 +148,7 @@ exports.main = async (event, context) => {
 
     // 获取二维码
     if (event.type === 'qrcode') {
-        let info = await db.collection('AdminStator').where({
+        let info = await db.collection('adminStator').where({
             '_openid': openId
         }).get()
         // 再次验证是否为超级管理员
@@ -165,7 +165,7 @@ exports.main = async (event, context) => {
             // 对字符串MD5加密
             let md5 = MD5(str)
             let code = str + md5.toUpperCase() + str
-            // var res = await db.collection('AdminStator').orderBy('level','asc').get()
+            // var res = await db.collection('adminStator').orderBy('level','asc').get()
             var add = await db.collection('TempCllection')
                 .add({
                     data: {
