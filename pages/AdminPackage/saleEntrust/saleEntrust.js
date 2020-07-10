@@ -1,4 +1,4 @@
-// pages/entrust/entrust.js
+const db = wx.cloud.database()
 const {
     formatTime
 } = require("../../../utils/util.js")
@@ -13,6 +13,7 @@ Page({
       fileIds1:[],
       fileIds2:[],
       fileIds3:[],
+      txtFilePaths:'',
        
 
         // 渲染输入框
@@ -59,7 +60,7 @@ Page({
             'maxlength': 50
         },
         {
-            'id': 'area',
+            'id': 'developers',
             'title': '开发商:',
             'placeholder': '如:中山市越秀地产开发有限公司',
             'type': 'text',
@@ -115,9 +116,16 @@ Page({
             'maxlength': 50
         },
         {
-            'id': 'openDate',
+            'id': 'price',
             'title': '价格:',
             'placeholder': '如:11000-30000',
+            'type': 'text',
+            'maxlength': 50
+        },
+        {
+            'id': 'vr',
+            'title': 'VR链接:',
+            'placeholder': '',
             'type': 'text',
             'maxlength': 50
         },
@@ -139,32 +147,39 @@ Page({
             'detailLocation': '',
             // 所在小区
             'location': '',
-            //装修配置
-            'furniture': '',
-            // 房子面积
+            //房间面积大小
             'area': '',
-            // 总价
-            'totalPrice': '',
-            // 均价
-            'averagePrice': '',
-            // 委托人姓名
-            'name': '',
-            // 委托人电话
-            'phonenumber': '',
+            // 建筑面积
+            'builtArea': '',
+            // 占地面积
+            'coveredArea': '',
+            // 车位总数
+            'car': '',
+            // 开发商
+            'developers': '',
+            // 物业公司
+            'propertyCompany': '',
+            //最高楼层
+            'floor':'',
+            //产权年限
+            'year':'',
+             //容积率
+             'volumeRate':'',
+              //绿化率
+            'greenRate':'',
+             //物业管理费
+             'management':'',
+              //房子类型
+              'type':'',
+               //价格
+               'price':'',
+               'vr':'',
             // 房子标签
             'Tags': [],
             // 房子类型，新房，旧房
-            'HouseType': '',
-            // 房间类型，如：一室一厅
-            'roomStyle': '',
-            // 居室类型，如：一居室
-            'houseStyle': '',
-            // 看房方式
-            'LookUpStyle': '',
-            // 契税发票时间是否满两年
-            'Invoice': '',
-            // 网签是否满三年
-            'Signing': ''
+           
+           
+           
         },
         // 地图列表
         imgList1: [],
@@ -572,63 +587,7 @@ Page({
         });
     },
 
-    // 提交信息前进行数据校验
-    Submit(e) {
-      var that = this
-      new Promise(function (resolve,reject){
-       
-        that.upload1(resolve)
-        that.upload2(resolve)
-        that.upload3(resolve)
-       }).then(function(){
-         
-         console.log("开始执行数据库操作")
-
-         console.log(that.data.fileIds1)
-         console.log(that.data.fileIds2)
-         console.log(that.data.fileIds3)
-       })
-
-        let FormData = this.data.FormData
-       
-       
-        // 表单数据的校验
-        // for (let key in FormData) {
-        //     if (FormData[key] == '') {
-        //         wx.showToast({
-        //             title: '请把所有数据填写完整',
-        //             icon: 'none',
-        //             mask: true,
-        //             duration: 2000
-        //         })
-        //         return;
-        //     }
-        // }
-
-        this.setData({
-            FormData: FormData
-        })
-        
-
-
-        // 上传图片
-     
-      //上传地图照片
-     
-      //上传封面
-     
-       //上传户型
-    
-      //上传txt
    
-
-      
-
-
-
-        //this.UploadImages()
-    },
-
 
     // 上传图片
     UploadImages() {
@@ -733,6 +692,7 @@ Page({
           date: e.detail.value
         })
       },
+
       chooseMessageFile:function(){
           var that = this
         wx.chooseMessageFile({
@@ -745,36 +705,191 @@ Page({
               console.log(res)
               console.log("tempFilePaths",tempFilePaths)
               that.setData({
-                txtUrl: tempFilePaths,
+                txtFilePaths: tempFilePaths,
                 txtName:res.tempFiles[0].name
               })
             }
           })
       },
 
+ // 提交信息前进行数据校验
+ Submit(e) {
+    let FormData = this.data.FormData
+     
+    //表单数据的校验
+    for (let key in FormData) {
+        if (FormData[key] == '') {
+            wx.showToast({
+                title: '请把所有数据填写完整',
+                icon: 'none',
+                mask: true,
+                duration: 2000
+            })
+            return;
+        }
+    }
+     wx.showLoading({
+       title: '上传中~',
+     })
+    var that = this
+   
+    let p1 = new Promise((resolve1,reject)=>{
+        this.upload1(resolve1)
+    })
+    let p2 = new Promise((resolve2,reject)=>{
+        this.upload2(resolve2)
+    })
+    let p3 = new Promise((resolve3,reject)=>{
+        this.upload3(resolve3)
+    })
+    let p4 = new Promise((resolve4,reject)=>{
+        this.uploadTxT(resolve4)
+    })
+    Promise.all([p1,p2,p3,p4]).then(res =>{
+        console.log("res",res)
+        console.log("数据全部上传完毕，执行数据库操作")
+        let FormData = this.data.FormData
+        db.collection('hourseList').add({
+            data: {
+              address: FormData.detailLocation,
+              area: FormData.area,
+              builtArea: FormData.builtArea,
+              car: FormData.car,
+              coveredArea: FormData.price,
+              developers: FormData.type,
+              floor: FormData.floor,
+              greenRate: FormData.greenRate,
+              imageUrls: this.data.fileIds3,
+              management:FormData.management,
+              mapUrl:this.data.fileIds1[0],
+              name:FormData.location,
+              openDate:this.data.date,
+              price:FormData.price,
+              propertyCompany:FormData.propertyCompany,
+              tags:FormData.Tags,
+              txtUrl:this.data.txtUrl,
+              type:FormData.type,
+              urls:this.data.fileIds2,
+              volumeRate:FormData.volumeRate,
+              vrUrl:FormData.vr,
+              year:FormData.year,
 
 
-  upload1(resolve){
-        // 上传图片
-        let imgList1 = this.data.imgList1
+
+
+            },
+            success: res => {
+              wx.hideLoading();
+              wx.showToast({
+                title: '上传成功',
+              })
+            },
+            fail: err => {
+              wx.hideLoading();
+              wx.showToast({
+                title: '上传失败，请联系管理员',
+              })
+            }
+          })
         
-        //上传地图照片
-        for (let i = 0; i < imgList1.length; i++) {
-          let item = imgList1[i];
-          let suffix = /\.\w+$/.exec(item)[0];//正则表达式返回文件的扩展名
+    })
+    
+
+     
+
+    
+
+    
+  },
+
+
+
+  uploadTxT(resolve4){
+      console.log("TXT",this.data.txtFilePaths)
+    let suffix = /\.\w+$/.exec(this.data.txtFilePaths[0].path); //正则表达式，返回文件扩展名
+    let path = 'lc-fdc/lp'+'/txt/'
+    wx.cloud.uploadFile({
+        cloudPath: path + new Date().getTime() + Math.random(1000,9999)+ suffix, // 上传至云端的路径
+        filePath: this.data.txtFilePaths[0].path, // 小程序临时文件路径
+        success: res => {
+          // 返回文件 ID
+          console.log(res.fileID)
+          this.setData({
+            txtUrl: res.fileID
+          })
+          console.log("TXT 成功")
+          resolve4("txtOK")
+        },
+        fail: err=>{
+            console.log("TXT fail",err)
+          wx.hideLoading()
+          wx.showModal({
+            title: '上传失败',
+          })
+        }
+      })
+
+
+  },
+  upload1(resolve1){
+        // 上传地图图片
+        console.log("up1",this.data.imgList1)
+        let promiseArr = []
+        for(let i=0;i<this.data.imgList1.length;i++){
+          promiseArr.push(new Promise((reslove,reject)=>{
+            let item = this.data.imgList1[i];
+            let suffix = /\.\w+$/.exec(item)[0]; //正则表达式，返回文件扩展名
+            let path = 'lc-fdc/lp'+'/map/'
+            wx.cloud.uploadFile({
+              cloudPath: path + new Date().getTime() + Math.random(1000,9999)+suffix, // 上传至云端的路径
+              filePath: item, // 小程序临时文件路径
+              success: res => {
+                // 返回文件 ID
+                console.log(res.fileID)
+                this.setData({
+                  fileIds1: this.data.fileIds1.concat(res.fileID)
+                })
+                reslove()
+              },
+              fail: err=>{
+                wx.hideLoading()
+                wx.showModal({
+                  title: '上传失败',
+                  content: err,
+                })
+              }
+            })
+    
+          }))
+        }
+        Promise.all(promiseArr).then(res =>{
+          console.log("地图图片上传完毕")
+          resolve1("地图ok")
+        })
+
+      },
+
+  upload2(resolve2) {
+      // 上传封面图片
+      console.log("up2",this.data.imgList2)
+      let promiseArr = []
+      for(let i=0;i<this.data.imgList2.length;i++){
+        promiseArr.push(new Promise((reslove,reject)=>{
+          let item = this.data.imgList2[i];
+          let suffix = /\.\w+$/.exec(item)[0]; //正则表达式，返回文件扩展名
+          let path = 'lc-fdc/lp'+'/cover/'
           wx.cloud.uploadFile({
-            cloudPath: 't1/' + new Date().getTime() + suffix, // 上传至云端的路径
+            cloudPath: path+new Date().getTime() + Math.random(1000,9999)+suffix, // 上传至云端的路径
             filePath: item, // 小程序临时文件路径
             success: res => {
               // 返回文件 ID
               console.log(res.fileID)
               this.setData({
-                fileIds1: this.data.fileIds1.concat(res.fileID)
+                fileIds2: this.data.fileIds2.concat(res.fileID)
               })
-              
-
+              reslove()
             },
-            fail: err => {
+            fail: err=>{
               wx.hideLoading()
               wx.showModal({
                 title: '上传失败',
@@ -782,85 +897,54 @@ Page({
               })
             }
           })
-        }
-   
-
-
-   
-
-
-      },
-
-  upload2(resolve) {
-    // 上传图片
-    let imgList2 = this.data.imgList2
-
-    //上传地图照片
-    for (let i = 0; i < imgList2.length; i++) {
-      let item = imgList2[i];
-      let suffix = /\.\w+$/.exec(item)[0];//正则表达式返回文件的扩展名
-      wx.cloud.uploadFile({
-        cloudPath: 't2/' + new Date().getTime() + suffix, // 上传至云端的路径
-        filePath: item, // 小程序临时文件路径
-        success: res => {
-          // 返回文件 ID
-
-          this.setData({
-            fileIds2: this.data.fileIds2.concat(res.fileID)
-          })
-          console.log(res.fileID)
-        
-
-        },
-        fail: err => {
-          wx.hideLoading()
-          wx.showModal({
-            title: '上传失败',
-            content: err,
-          })
-        }
+  
+        }))
+      }
+      Promise.all(promiseArr).then(res =>{
+        console.log("封面图片上传完毕")
+        resolve2("封面ok")
       })
-    }
-    
-
-
-    console.log("2222")
-
 
   },
 
 
-  upload3(resolve) {
-    // 上传图片
-    let imgList3 = this.data.imgList3
 
-    //上传地图照片
-       
-    for (let i = 0; i < imgList3.length; i++) {
-      let item = imgList3[i];
-      let suffix = /\.\w+$/.exec(item)[0];//正则表达式返回文件的扩展名
-      wx.cloud.uploadFile({
-        cloudPath: 't3/' + new Date().getTime() + suffix, // 上传至云端的路径
-        filePath: item, // 小程序临时文件路径
-        success: res => {
-          // 返回文件 ID
 
-          this.setData({
-            fileIds3: this.data.fileIds3.concat(res.fileID)
-          })
-          console.log(res.fileID)
-         
-
-        },
-        fail: err => {
-          wx.hideLoading()
-          wx.showModal({
-            title: '上传失败',
-            content: err,
-          })
-        }
-      })
-    }
+  upload3(resolve3) {
+    console.log("up3",this.data.imgList3)
+     // 上传户型图片
+     let promiseArr = []
+     for(let i=0;i<this.data.imgList3.length;i++){
+       promiseArr.push(new Promise((reslove,reject)=>{
+         let item = this.data.imgList3[i];
+         let suffix = /\.\w+$/.exec(item)[0]; //正则表达式，返回文件扩展名
+         let path = 'lc-fdc/lp'+'/house/'
+         wx.cloud.uploadFile({
+           cloudPath: path+new Date().getTime() + Math.random(1000,9999)+suffix, // 上传至云端的路径
+           filePath: item, // 小程序临时文件路径
+           success: res => {
+             // 返回文件 ID
+             console.log(res.fileID)
+             this.setData({
+               fileIds3: this.data.fileIds3.concat(res.fileID)
+             })
+             reslove()
+           },
+           fail: err=>{
+             wx.hideLoading()
+             wx.showModal({
+               title: '上传失败',
+               content: err,
+             })
+           }
+         })
+ 
+       }))
+     }
+     Promise.all(promiseArr).then(res =>{
+       console.log("户型图片上传完毕，执行数据库操作")
+       resolve3("户型图ok")
+     })
 
    
 

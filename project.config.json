@@ -7,16 +7,16 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"enhance": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"coverView": true,
-		"nodeModules": true,
 		"autoAudits": false,
+		"coverView": true,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
+		"enhance": true,
+		"nodeModules": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -256,6 +256,13 @@
 					"id": -1,
 					"name": "pages/AdminPackage/managerAdmin/managerAdmin",
 					"pathName": "pages/AdminPackage/managerAdmin/managerAdmin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/saleEntrust/saleEntrust",
+					"pathName": "pages/AdminPackage/saleEntrust/saleEntrust",
 					"scene": null
 				}
 			]

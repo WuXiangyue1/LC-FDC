@@ -15,11 +15,13 @@
 			<span class="iconfont icon-jiaruwomen1"></span>
 			<span class="iconfont icon-kefu_lr"></span>
 			<span class="iconfont icon-fabu"></span>
+				<span class="iconfont icon-fabu"></span>
 		</view>
 		<view class='record' bindtap='gongsijianjie'>公司介绍<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
 		<view class='record soucang' bindtap='jiaruwomen'> 加入我们<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
 		<view class='record fabu' bindtap='viewClick'>联系客服<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
 
+	<view class='record fabu' >我的收藏<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span></view>
 		<view class='record fabu'>
 			关注公众号<span class="iconfont icon-tiaozhuanqianwangyoujiantouxiangyouxiayibuxianxing jiantou"></span>
 		</view>

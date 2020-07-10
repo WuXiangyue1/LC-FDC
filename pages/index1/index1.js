@@ -9,7 +9,7 @@ Page({
     averageNumber:"",
     averagePrice:"",
     pageIndex:1,
-    pageSize:3,
+    pageSize:10,
     hourseList:[],
     hasMore:"",
     msgList: [
