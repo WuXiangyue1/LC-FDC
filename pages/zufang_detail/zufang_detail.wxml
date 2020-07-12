@@ -76,7 +76,7 @@
 	<text class='other_name1'>区   域：<text style='color:black'>{{information.local}}</text></text>
 	<text class='other_name1'>电梯情况：<text style='color:black'>{{information.elevator}}</text></text>
 	<text class='other_name1'>房屋朝向：<text style='color:black'>{{information.orientation}}</text></text>
-	<text class='other_name1'>容 积 率 ：<text style='color:black'>{{information.volumeRate}}</text></text>
+	<text class='other_name1'>楼   层 ：<text style='color:black'>{{information.floor}}层</text></text>
 	<text class='other_name1'>绿 化 率 ：<text style='color:black'>{{information.greenRate}}</text></text>
 	<text class='other_name1'>车位情况：<text style='color:black'>{{information.car}}</text></text>
 	<text class='other_name1'>物 管 费：<text style='color:black'>{{information.management}}</text></text>

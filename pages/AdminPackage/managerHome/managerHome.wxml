@@ -5,9 +5,9 @@
 			<text class="font">上传楼盘</text>
 		</view>
 
-		<view class="size  iconfont icon-shangchuan">
+		<navigator url="../uploadHouse/uploadHouse" class="size  iconfont icon-shangchuan">
 			<text class="font">上传房源</text>
-		</view>
+		</navigator>
 
 		<view class="size iconfont icon-shangchuan">
 			<text class="font ">上传txt</text>
