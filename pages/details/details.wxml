@@ -3,7 +3,7 @@
 <swiper indicator-dots="false" autoplay="true" interval="3000" duration="1000" circular="true">
 	<block wx:for="{{imgArr}}" wx:key="index">
 		<swiper-item>
-			<image class='slide' src="{{item}}" bindtap='previewImg' data-index='{{index}}'></image>
+			<image mode="aspectFill" class='slide' src="{{item}}" bindtap='previewImg' data-index='{{index}}'></image>
 			<view class='idx'><text>{{index+1}}/{{imgArr.length}}</text></view>
 		</swiper-item>
 	</block>
@@ -15,9 +15,9 @@
 	<span class="iconfont icon-fangyuan_zaishou"></span>
 	<text class='other_name'></text>
 	<view>
-		<text class='raduce' style='background:#FCF1DF;color:#F0C07D;'>优惠打折</text>
-		<text class='raduce' style='background:#FCE4E0;color:#FE7F78'>小户型</text>
-		<text class='raduce' style='background:#E3F3FD;color:#72B9F6'>低总价</text>
+		<text class='raduce' style='background:#FCF1DF;color:#F0C07D;'>{{tags[0]}}</text>
+		<text class='raduce' style='background:#FCE4E0;color:#FE7F78'>{{tags[1]}}</text>
+		<text class='raduce' style='background:#E3F3FD;color:#72B9F6'>{{tags[2]}}</text>
 	</view>
 	<text class='other_name'>楼房均价：<text style='color:orangered'>{{information.price}}元/m²</text></text>
 	<text class='other_name'>格局户型：<text style='color:black'>{{information.area}}m²  {{information.type}}</text></text>
@@ -29,7 +29,7 @@
 <view class="page-section-spacing">
 	<scroll-view class="scroll-view_H" scroll-x="true"  style="width: 100%">
 		<block wx:for="{{imgHuxingArr}}">
-			<image style="width:390px;padding:0 20rpx" src='{{item}}' data-index="{{index}}" bindtap='previewHuxingImg'></image>
+			<image mode="aspectFill" style="width:390px;padding:0 20rpx" src='{{item}}' data-index="{{index}}" bindtap='previewHuxingImg'></image>
 		</block>
 
 	</scroll-view>
@@ -55,7 +55,7 @@
 
 <!-- 项目简介 -->
 <view class="xmjj {{ellipsis?'ellipsis':'unellipsis'}}" style='margin-top:20rpx;'>
-	<text class='title'>房源描述</text>
+	<text class='title'>楼盘描述</text>
 	<view class="context"><text >{{txtContent}}</text></view>
 	<view bindtap='ellipsis' class='show'>
 		<image class='img-ellipsis' src="{{ellipsis?'../zufang_detail/image/ellipsis.png':'../zufang_detail/image/unellipsis.png'}}"></image>
@@ -70,7 +70,7 @@
 	<text class='clickmap' style='font-size:24rpx;'>(点地图)</text>
 	<view class='ditu'>
 		<!-- map.wxml -->
-		<image bindtap='getLocation' src='{{information.mapUrl}}'></image>
+		<image mode="aspectFill" bindtap='getLocation' src='{{information.mapUrl}}'></image>
 	</view>
 </view>
 <!--房源数据推荐位置-->

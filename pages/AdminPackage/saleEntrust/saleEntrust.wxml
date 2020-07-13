@@ -22,12 +22,24 @@
 </view>
 
 
-<!-- 标签选择器 -->
+<!-- 楼盘标签选择器 -->
 <view class="cu-form-group margin-top padding-right-30rpx">
 	<view class='title'>
 		<text decode="true">&nbsp;&nbsp;<text decode="true" style="color:#EE0A24;">*</text>楼盘优势</text>
 	</view>
-	<view class="picker select-color {{displayTags?'selected-color':'select-color'}}" style="font-size:28rpx;" catchtap="showModal" data-target="ChooseModal">
+	<view class="picker select-color {{displayTags?'selected-color':'select-color'}}" style="font-size:28rpx;" catchtap="showLpModal" data-target="ChooseModal">
+		{{displayTags?displayTags:'点击选择'}}
+	</view>
+</view>
+
+
+
+<!-- 小区标签选择器 -->
+<view class="cu-form-group margin-top padding-right-30rpx">
+	<view class='title'>
+		<text decode="true">&nbsp;&nbsp;<text decode="true" style="color:#EE0A24;">*</text>小区配套</text>
+	</view>
+	<view class="picker select-color {{displayTags?'selected-color':'select-color'}}" style="font-size:28rpx;" catchtap="showXqModal" data-target="ChooseModal">
 		{{displayTags?displayTags:'点击选择'}}
 	</view>
 </view>
@@ -115,7 +127,7 @@
 	<button class='cu-btn lg submitbtn' form-type="SubmitEntrust" style="background:#0080ff;" bindtap="Submit">上传楼盘</button>
 </view>
 
-<!-- 标签选择 -->
+<!-- 楼盘标签选择 -->
 <view class="cu-modal bottom-modal {{modalName=='ChooseModal'?'show':''}}" catchtap="hideModal">
 	<view class="cu-dialog">
 		<view class="cu-bar bg-white">
@@ -125,6 +137,23 @@
 
 		<view class="grid col-3">
 			<view wx:for="{{templeCheckbox}}" style="width:25%;margin:15rpx 0;" wx:key="index">
+				<view class="tag-box lg block {{item.checked?'bg-blue text-white':''}}" catchtap="ChooseLpCheckbox" data-value="{{item.value}}" data-name="{{item.name}}"> {{item.name}}
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<!-- 小区标签选择 -->
+<view class="cu-modal bottom-modal {{modalName=='ChooseModal'?'show':''}}" catchtap="hideModal">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white">
+			<view class="action text-blue">最多选只能3个标签：({{templeTags.length?templeTags.length:0}}/3)</view>
+			<view class="action text-green" catchtap="lpConfirm">确定</view>
+		</view>
+
+		<view class="grid col-3">
+			<view wx:for="{{templeXqCheckbox}}" style="width:25%;margin:15rpx 0;" wx:key="index">
 				<view class="tag-box lg block {{item.checked?'bg-blue text-white':''}}" catchtap="ChooseCheckbox" data-value="{{item.value}}" data-name="{{item.name}}"> {{item.name}}
 				</view>
 			</view>

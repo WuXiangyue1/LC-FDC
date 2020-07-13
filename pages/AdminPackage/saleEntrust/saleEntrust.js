@@ -188,8 +188,8 @@ Page({
         // 户型列表
         imgList3: [],
         modalName: null,
-        // 标签选择
-        checkbox: [{
+        // 楼盘标签选择
+        lpcheckbox: [{
             value: 0,
             name: '优惠打折',
             checked: false
@@ -232,6 +232,56 @@ Page({
         }, {
             value: 10,
             name: '学区房',
+            checked: false
+        }, {
+            value: 11,
+            name: '靠山傍海',
+            checked: false
+        }],
+        // 楼盘标签选择
+        xqcheckbox: [{
+            value: 0,
+            name: '社区公园',
+            checked: false
+        }, {
+            value: 1,
+            name: '健身设施',
+            checked: false
+        }, {
+            value: 2,
+            name: '游泳池',
+            checked: false
+        }, {
+            value: 3,
+            name: '篮球场',
+            checked: false
+        }, {
+            value: 4,
+            name: '排球场',
+            checked: false
+        }, {
+            value: 5,
+            name: '足球场',
+            checked: false
+        }, {
+            value: 6,
+            name: '歌舞厅',
+            checked: false
+        }, {
+            value: 7,
+            name: '绿道凉亭',
+            checked: false
+        }, {
+            value: 8,
+            name: '兵乓球场',
+            checked: false
+        }, {
+            value: 9,
+            name: '羽毛球场',
+            checked: false
+        }, {
+            value: 10,
+            name: '田径场',
             checked: false
         }, {
             value: 11,
@@ -482,12 +532,22 @@ Page({
         })
     },
 
-    // 显示弹窗
-    showModal(e) {
+    // 显示楼盘弹窗
+    showLpModal(e) {
         console.log('0.showModal')
-        let templeCheckbox = this.data.checkbox
+        let templeCheckbox = this.data.lpcheckbox
         this.setData({
             templeCheckbox: templeCheckbox,
+            modalName: e.currentTarget.dataset.target
+        })
+    },
+
+    // 显示小区弹窗
+    showXqModal(e) {
+        
+        let templeCheckbox = this.data.xqcheckbox
+        this.setData({
+            templeXqCheckbox: templeCheckbox,
             modalName: e.currentTarget.dataset.target
         })
     },
@@ -507,7 +567,7 @@ Page({
     },
 
     // 点击确认后保存显示confirm
-    Confirm(e) {
+    lpConfirm(e) {
         console.log('2.Confirm')
         let templeTags = this.data.templeTags
         let templeCheckbox = this.data.templeCheckbox
@@ -522,7 +582,7 @@ Page({
     },
 
     // 选择弹窗
-    ChooseCheckbox(e) {
+    ChooseLpCheckbox(e) {
         console.log('3.ChooseCheckbox')
         let strArray = []
         let templeTags = this.data.templeTags
