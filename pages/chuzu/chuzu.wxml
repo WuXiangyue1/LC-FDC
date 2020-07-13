@@ -3,7 +3,7 @@
 	<view class='search'>
 		<view class='sousuo'>
 			<span class="iconfont icon-fangdajing"></span>
-			<input type="text" confirm-type="search" bindconfirm="doSearch" placeholder="请输入楼盘名称、区域或片区" style='font-size:26rpx;' />
+			<input type="text" confirm-type="search" bindconfirm="doSearch" placeholder="请输入楼盘名称 如:雅居乐" style='font-size:26rpx;' />
 		</view>
 	</view>
 
@@ -63,6 +63,8 @@
 						<view class="{{type_num == 3?'add_House':'add_city'}}" data-num="3" bindtap="clickType" data-name="3室1厅">3室1厅</view>
 						<view class="{{type_num == 4?'add_House':'add_city'}}" data-num="4" bindtap="clickType" data-name="3室2厅">3室2厅</view>
 						<view class="{{type_num == 5?'add_House':'add_city'}}" data-num="5" bindtap="clickType" data-name="4室2厅">4室2厅</view>
+
+            	<view class="{{type_num == 6?'add_House':'add_city'}}" data-num="6" bindtap="clickType" data-name="其他">其他</view>
 					</view>
 				</swiper-item>
 			</swiper>

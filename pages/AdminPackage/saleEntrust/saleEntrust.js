@@ -195,7 +195,7 @@ Page({
             checked: false
         }, {
             value: 1,
-            name: '近地铁',
+            name: '南北通透',
             checked: false
         }, {
             value: 2,
@@ -842,6 +842,11 @@ Page({
               wx.hideLoading();
               wx.showToast({
                 title: '上传成功',
+              })
+
+              // 页面跳转到成功页面
+              wx.navigateBack({
+                
               })
             },
             fail: err => {
