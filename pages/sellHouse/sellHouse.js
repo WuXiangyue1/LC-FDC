@@ -183,13 +183,14 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     if (res.from === 'button') {
       console.log(res.target)
     }
+    var me = this;
     return {
       title: '爱尚房',
-      path: "pages/sellHouse/sellHouse"
+      path: "pages/getPhone/getPhone"
     }
   },
 

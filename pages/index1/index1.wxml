@@ -1,113 +1,127 @@
 <view class="container1">
-	<swiper indicator-dots="true" autoplay="true" interval="2000" duration="1000">
-		<block wx:for="{{swiperImgUrls}}">
-			<swiper-item>
-				<image class="img" src="{{item.url}}" mode="widthFix"></image>
-			</swiper-item>
-		</block>
-	</swiper>
+  <swiper indicator-dots="true" autoplay="true" interval="2000" duration="1000">
+    <block wx:for="{{swiperImgUrls}}">
+      <swiper-item>
+        <image class="img" src="{{item.url}}" mode="widthFix"></image>
+      </swiper-item>
+    </block>
+  </swiper>
 
-	<view class="menuWrap bg-white">
-		<view class="menuWrap-item">
-			<view class="menuWrap-item-navi" bindtap="getScanning">
-				<span class="iconfont icon-jisuanqi"></span>
-				<text>房贷计算</text>
-			</view>
-		</view>
-		<view class="menuWrap-item">
-			<navigator class="menuWrap-item-navi" url="../information/information">
-				<span class="iconfont icon-fangzi"></span>
-				<text>相关资讯</text>
-			</navigator>
-		</view>
-		<view bindtap="getshuifeijisuanqi" class="menuWrap-item">
-			<navigator class="menuWrap-item-navi">
-				<span class="iconfont icon-icon--"></span>
-				<text>税费计算</text>
-			</navigator>
-		</view>
+  <view class="menuWrap bg-white">
+    <view class="menuWrap-item">
+      <view class="menuWrap-item-navi" bindtap="getScanning">
+        <span class="iconfont icon-jisuanqi"></span>
+        <text>房贷计算</text>
+      </view>
+    </view>
+    <view class="menuWrap-item">
+      <navigator class="menuWrap-item-navi" url="../information/information">
+        <span class="iconfont icon-fangzi"></span>
+        <text>相关资讯</text>
+      </navigator>
+    </view>
+    <view bindtap="getshuifeijisuanqi" class="menuWrap-item">
+      <navigator class="menuWrap-item-navi">
+        <span class="iconfont icon-icon--"></span>
+        <text>税费计算</text>
+      </navigator>
+    </view>
 
-		<view bindtap="callPhone" class="menuWrap-item">
-			<navigator class="menuWrap-item-navi">
-				<span class="iconfont icon-dianhua"></span>
-				<text>联系我们</text>
-			</navigator>
-		</view>
-	</view>
+    <view bindtap="callPhone" class="menuWrap-item">
+      <navigator class="menuWrap-item-navi">
+        <span class="iconfont icon-dianhua"></span>
+        <text>联系我们</text>
+      </navigator>
+    </view>
+  </view>
 
 
-<view class='zixun'>
-	<image src='http://m.qpic.cn/psb?/V10e6ejl0ETYD9/WKMpVFFyHaBQ64BN5e54E2yvZq4mtIhqWq8f0L3NIwo!/b/dL4AAAAAAAAA&bo=yABXAAAAAAADB70!&rf=viewer_4'></image>
-	<!--<view class='zixun_title'>
+  <view class='zixun'>
+    <image src='/images/psb.png'></image>
+    <!--<view class='zixun_title'>
 佛山租房和无房提取住房公积金标准不变 无房提取最高6930元/年
 </view>-->
-	<swiper class="swiper_zixun" vertical="true" autoplay="true" circular="true" interval="3000" bindtap='information_details'>
-		<block wx:for="{{msgList}}" wx:key="unique">
-			<swiper-item>
-				<view class="zixun_item">{{item.title}}</view>
-			</swiper-item>
-		</block>
-	</swiper>
-</view>
-	<view class='catline'></view>
-	<view class='priceContainer'>
-		<!-- 标题和分割线 -->
-		<view class='priceTitle'>
-			<text>—  楼盘市场行情  —</text>
-		</view>
-		<view class='line'></view>
-		<!-- 全市均价和一个月房子成交量 -->
-		<view class='volumeContainer'>
-			<!-- 左侧容器 -->
-			<view class='Container'>
-				全市房源均价
-			</view>
-			<!-- 右侧容器 -->
-			<view class='Container'>
-				当月房间成交量
-			</view>
-		</view>
-		<!-- 详情 -->
-		<view class='price'>
-			<text>{{averagePrice}} 元/平米</text>
-			<text>{{averageNumber}} 套</text>
-		</view>
-	</view>
-	<view class='catline'></view>
+    <swiper class="swiper_zixun" vertical="true" autoplay="true" circular="true" interval="3000" bindtap='information_details'>
+      <block wx:for="{{msgList}}" wx:key="unique">
+        <swiper-item>
+          <view class="zixun_item">{{item.title}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='catline'></view>
+  <view class='priceContainer'>
+    <!-- 标题和分割线 -->
+    <view class='priceTitle'>
+      <text>—  楼盘市场行情  —</text>
+    </view>
+    <view class='line'></view>
+    <!-- 全市均价和一个月房子成交量 -->
+    <view class='volumeContainer'>
+      <!-- 左侧容器 -->
+      <view class='Container'>
+        全市房源均价
+      </view>
+      <!-- 右侧容器 -->
+      <view class='Container'>
+        当月房间成交量
+      </view>
+    </view>
+    <!-- 详情 -->
+    <view class='price'>
+      <text>{{averagePrice}} 元/平米</text>
+      <text>{{averageNumber}} 套</text>
+    </view>
+  </view>
+  <view class='catline'></view>
 
-	<view class='weituo' bindtap='weituo'>
-	<view class='weituo_title'><text>我要委托</text></view>
-	<view class='weituoguanli'>委托管理</view>
-	<span class="icon iconfont icon-jiantou"></span>
-</view>
-<!--2019年6月11日14:25:41
+  <view class='weituo' bindtap='weituo'>
+    <view class='weituo_title'>
+      <text>我要委托</text>
+    </view>
+    <view class='weituoguanli'>委托管理</view>
+    <span class="icon iconfont icon-jiantou"></span>
+  </view>
+  <!--2019年6月11日14:25:41
 实现：
 租房 售房 界面-->
-<view class='zushou'>
-	<view class='sale' wx:for="{{salelist}}" wx:key="unique">
-		<view class='sale_title' bindtap='{{zushou[index]}}'>{{item.sale_title}}</view>
-		<view class='sale_describel' bindtap='{{zushou[index]}}'>{{item.sale_describel}}</view>
-		<image class='sale_pic' src='{{item.sale_pic}}' bindtap='{{zushou[index]}}'></image>
-	</view>
-</view>
-	<block wx:for="{{hourseList}}">
-		<view class="noticeList bg-white">
+  <view class='zushou'>
+    <view class='sale' wx:for="{{salelist}}" wx:key="unique">
+      <view class='sale_title' bindtap='{{zushou[index]}}'>{{item.sale_title}}</view>
+      <view class='sale_describel' bindtap='{{zushou[index]}}'>{{item.sale_describel}}</view>
+      <image class='sale_pic' src='{{item.sale_pic}}' bindtap='{{zushou[index]}}'></image>
+    </view>
 
-			<!-- <navigator class="noticeList-item" url="../html/html?name={{item.name}}"> -->
+    <view class="search">
+
+
+      <picker mode="multiSelector" bindchange="localStyleChange" value="{{localSelected}}" range="{{localList}}" class="swiper-tab-list on" >{{area}}
+        <span class="iconfont icon-xiala"></span>
+
+      </picker>
+      <input maxlength="80" type="text" confirm-type="search" bindconfirm="doSearch" class="input-search" placeholder="请输入楼盘名称 如雅居乐" />
+    </view>
+  </view>
+  <block wx:for="{{hourseList}}">
+    <view class="noticeList bg-white">
+
+      <!-- <navigator class="noticeList-item" url="../html/html?name={{item.name}}"> -->
       <navigator class="noticeList-item" url="../details/details?id={{item._id}}">
-				<image src="{{item.urls[0]}}" style="width:112px;height:68px;"></image>
-				<view class="noticeList-item-r">
-					<text class="noticeList-item-title">{{item.name}}</text>
-					<text class="noticeList-item-desc">户型：{{item.type}}</text>
-					<text class="noticeList-item-desc">面积：{{item.area}}m²</text>
-					<text class="noticeList-item-desc" style="color:red">售价：{{item.price}}/m²</text>
-				</view>
-			</navigator>
+        <image src="{{item.urls[0]}}" style="width:112px;height:68px;"></image>
+        <view class="noticeList-item-r">
+          <text class="noticeList-item-title">{{item.name}}</text>
+          <text class="noticeList-item-desc">户型：{{item.type}}</text>
+          <text class="noticeList-item-desc">面积：{{item.area}}m²</text>
+          <text class="noticeList-item-desc" style="color:red">售价：{{item.price}}/m²</text>
+        </view>
+      </navigator>
 
-		</view>
-	</block>
-<view>
-	<button class="img-plus-style zindex100 yc" open-type="contact"></button>
-	<image src="/images/icon/reply.png" class="img-plus-style"></image>
-</view>
+    </view>
+  </block>
+  <view>
+    <button class="img-plus-style zindex100 yc" open-type="contact"></button>
+    <image src="/images/icon/reply.png" class="img-plus-style">在线</image>
+    
+    
+  </view>
 </view>

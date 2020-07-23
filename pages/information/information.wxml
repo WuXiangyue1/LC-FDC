@@ -14,7 +14,7 @@
 						<view class='liebiao_title'>{{item.title}}</view>
 						<view class='liulan_time'>
 							<view class='liebiao_time'><span class="iconfont icon-48copy11"></span> {{item.createTime}}</view>
-							<view class='liulan'><span class="iconfont icon-liulanliang"></span> {{item.count}}</view>
+							<!-- <view class='liulan'><span class="iconfont icon-liulanliang"></span> {{item.count}}</view> -->
 						</view>
 					</view>
 
@@ -42,7 +42,7 @@
 						<view class='liebiao_title'>{{item.title}}</view>
 						<view class='liulan_time'>
 							<view class='liebiao_time'><span class="iconfont icon-48copy11"></span> {{item.createTime}}</view>
-							<view class='liulan'><span class="iconfont icon-liulanliang"></span> {{item.count}}</view>
+							<!-- <view class='liulan'><span class="iconfont icon-liulanliang"></span> {{item.count}}</view> -->
 						</view>
 					</view>
 
@@ -74,7 +74,7 @@
 						<view class='liebiao_title'>{{item.title}}</view>
 						<view class='liulan_time'>
 							<view class='liebiao_time'><span class="iconfont icon-48copy11"></span> {{item.createTime}}</view>
-							<view class='liulan'><span class="iconfont icon-liulanliang"></span> {{item.count}}</view>
+							<!-- <view class='liulan'><span class="iconfont icon-liulanliang"></span> {{item.count}}</view> -->
 						</view>
 					</view>
 

@@ -819,9 +819,9 @@ Page({
       },
     }).then(res =>{
       console.log(res)
-
+      var newObject = [];
       for (var i = 0; i < res.result.data.length; i++) {
-        var newObject = [];
+        
         newObject.push(res.result.data[i].address)
       }
       this.setData({
@@ -843,8 +843,9 @@ Page({
       },
     }).then(res => {
       console.log(res)
+      var newObject = []
        for (var i = 0; i < res.result.data.length; i++) {
-        var newObject = []
+        
          newObject.push(res.result.data[i].name)
       }
       this.setData({

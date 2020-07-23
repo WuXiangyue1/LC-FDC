@@ -160,14 +160,14 @@ Page({
       wx.hideLoading()
     }, 1000)},
 
-    onShareAppMessage: function (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
-      var me = this;
-      return {
-        title: '爱尚房',
-        path: "pages/index1/index1"
-      }
+  onShareAppMessage: function () {
+    if (res.from === 'button') {
+      console.log(res.target)
     }
+    var me = this;
+    return {
+      title: '爱尚房',
+      path: "pages/getPhone/getPhone"
+    }
+  }
 })

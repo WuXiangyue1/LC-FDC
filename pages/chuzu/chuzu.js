@@ -168,7 +168,7 @@ Page({
     var areaNum = that.data.areaNum;
     var searchName = that.data.searchName;
     var localName = '中山';
-    var type = that.data.type_num != 0 ? that.data.type : '室';
+    var type = that.data.type_num != 0 ? that.data.type : '';
     if(areaName != '不限' && areaNum != 0 && areaName != '区域'){
            localName = areaName
     }
@@ -388,14 +388,14 @@ Page({
   // })
 
   // },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function () {
     if (res.from === 'button') {
       console.log(res.target)
     }
     var me = this;
     return {
       title: '爱尚房',
-      path: "pages/index1/index1"
+      path: "pages/getPhone/getPhone"
     }
   }
 

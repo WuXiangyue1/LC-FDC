@@ -67,14 +67,14 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function () {
     if (res.from === 'button') {
       console.log(res.target)
     }
     var me = this;
     return {
-      title: '尚居乐',
-      path: "pages/index1/index1"
+      title: '爱尚房',
+      path: "pages/getPhone/getPhone"
     }
   }
 })

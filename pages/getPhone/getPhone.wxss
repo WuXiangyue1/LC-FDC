@@ -36,3 +36,7 @@ page{
   height: 36rpx;
   margin-right: 30rpx;
 }
+
+.imagewx{
+  z-index: 9999
+}

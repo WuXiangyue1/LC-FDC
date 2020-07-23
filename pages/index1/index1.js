@@ -9,7 +9,7 @@ Page({
     averageNumber:"",
     averagePrice:"",
     pageIndex:1,
-    pageSize:10,
+    pageSize:3,
     hourseList:[],
     hasMore:"",
     msgList: [
@@ -45,13 +45,19 @@ Page({
     //   sale_pic: '/images/yishou.png'
     // }
     ],
+    area:'区域',
+    localList: [
+      ['中山市'],
+      ['不限', '石岐', '东区', '南区', '西区','火炬', '小榄','板芙','神湾','东升','古镇','横栏','三角','黄圃','南头','东凤','阜沙','民众','南朗','港口','大涌','沙溪','三乡']
+    ],
+    name:''
   },
  
  
   onLoad: function () {
     this.getHeadList();
     this.getAverage();
-    this.getAllHourseList();
+    this.getAllHourseList(this.data.pageIndex,this.data.pageSize);
 
     // wx.checkSession({
     //   success () {
@@ -131,6 +137,11 @@ Page({
   },
   getAllHourseList:function(pageIndex,pageSize){
     var that = this;
+    let area = this.data.area;
+    if (area == '区域' || area =='中山市不限' ){
+      area = ''
+    }
+    let name = this.data.name;
     wx.showLoading({
       title: '请等待，加载中',
     })
@@ -141,6 +152,14 @@ Page({
         pageIndex:pageIndex,
         pageSize:pageSize,
         filter:{
+          name:{
+            $regex: '.*' + name,
+            $options: 'i'
+          },
+          address:{
+            $regex: '.*' + area,
+            $options: 'i'
+          }
          
         }
       }
@@ -219,19 +238,58 @@ Page({
       url: "/pages/weituoguanli/weituoguanli"
     })
   },
+
+  // 区域
+  // 区域选择
+  localStyleChange(e) {
+    let localList = this.data.localList
+    console.log(e, e.detail.value)
+    let value = e.detail.value
+    let shi = value[0]
+    let qu = value[1]
+    shi = localList[0][shi]
+    qu = localList[1][qu]
+    let local = `${shi}${qu}`
+    this.setData({
+      area: local,
+      pageIndex: 1
+    })
+    
+
+    this.getAllHourseList(this.data.pageIndex, this.data.pageSize);
+  },
+
+  doSearch(e){
+    console.log(e)
+    let name = e.detail.value;
+    this.setData({
+      name:name,
+      pageIndex:1
+      
+    })
+    this.getAllHourseList(this.data.pageIndex, this.data.pageSize)
+
+  },
    /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
-      var me = this;
-      return {
-        title: '尚居乐',
-        path: "pages/index1/index1"
-      }
+  onShareAppMessage: function () {
+    if (res.from === 'button') {
+      console.log(res.target)
     }
+    var me = this;
+    return {
+      title: '爱尚房',
+      path: "pages/getPhone/getPhone"
+    }
+  },
+
+  onShareTimeline:function(res){
+    return{
+      title:'爱尚房',
+      
+    }
+  }
   
   
     

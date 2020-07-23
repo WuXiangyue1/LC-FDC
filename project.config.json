@@ -29,8 +29,8 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.11.1",
-	"appid": "wx0c61e4a6faf22608",
+	"libVersion": "2.12.0",
+	"appid": "wx4c6b81e095349299",
 	"projectname": "%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -268,7 +268,6 @@
 				},
 				{
 					"id": -1,
-
 					"name": "pages/details/details",
 					"pathName": "pages/details/details",
 					"query": "",
@@ -278,7 +277,34 @@
 					"id": -1,
 					"name": "pages/AdminPackage/uploadHouse/uploadHouse",
 					"pathName": "pages/AdminPackage/uploadHouse/uploadHouse",
-
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/information_details/information_details",
+					"pathName": "pages/information_details/information_details",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/gongsijianjie/gongsijianjie",
+					"pathName": "pages/gongsijianjie/gongsijianjie",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/information/information",
+					"pathName": "pages/information/information",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdminPackage/uploadNews/uploadNews",
+					"pathName": "pages/AdminPackage/uploadNews/uploadNews",
 					"scene": null
 				}
 			]

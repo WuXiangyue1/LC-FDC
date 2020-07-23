@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 //先init => db
 cloud.init({
-  env: "lc-123",
+  env: "lc-12",
   traceUser: true,
 })
 const db = cloud.database()

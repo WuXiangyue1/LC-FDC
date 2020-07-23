@@ -68,7 +68,7 @@ Page({
         },
         {
             'id': 'propertyCompany',
-            'title': '公司:',
+            'title': '物业公司:',
             'placeholder': '如:广州市越秀物业管理有限公司',
             'type': 'text',
             'maxlength': 50
@@ -175,7 +175,8 @@ Page({
                'price':'',
                'vr':'',
             // 房子标签
-            'Tags': [],
+            'XQTags': [],
+          'LPTags': [],
             // 房子类型，新房，旧房
            
            
@@ -189,31 +190,38 @@ Page({
         imgList3: [],
         modalName: null,
         // 楼盘标签选择
-        lpcheckbox: [{
+        lpcheckbox: [
+          {
             value: 0,
             name: '优惠打折',
             checked: false
-        }, {
+        }, 
+        {
             value: 1,
             name: '南北通透',
             checked: false
-        }, {
+        }, 
+        {
             value: 2,
             name: '低总价',
             checked: false
-        }, {
+        }, 
+        {
             value: 3,
             name: '交通便利',
             checked: false
-        }, {
+        }, 
+        {
             value: 4,
             name: '近商圈',
             checked: false
-        }, {
+        }, 
+        {
             value: 5,
             name: '精装',
             checked: false
-        }, {
+        }, 
+        {
             value: 6,
             name: '毛坯房',
             checked: false
@@ -292,7 +300,8 @@ Page({
         displayTags: '',
         // 临时变量
         templeCheckbox: [],
-        templeTags: []
+        templeTags: [],
+       templeXqTags: []
     },
 
     /**
@@ -537,7 +546,7 @@ Page({
         console.log('0.showModal')
         let templeCheckbox = this.data.lpcheckbox
         this.setData({
-            templeCheckbox: templeCheckbox,
+          templeLpCheckbox: templeCheckbox,
             modalName: e.currentTarget.dataset.target
         })
     },
@@ -553,40 +562,16 @@ Page({
     },
 
     // 关闭弹窗
-    hideModal(e) {
-        // console.log('1.hideModal')
-        // // let templeCheckbox = this.data.templeCheckbox
-        // let Tags = this.data.Tags
-        // let checkbox = this.data.checkbox
-        // // 数据恢复到选择前的状态
-        // this.setData({
-        //     templeCheckbox: checkbox,
-        //     templeTags: Tags,
-        //     modalName: null
-        // })
-    },
+    
 
-    // 点击确认后保存显示confirm
-    lpConfirm(e) {
-        console.log('2.Confirm')
-        let templeTags = this.data.templeTags
-        let templeCheckbox = this.data.templeCheckbox
-        let FormData = this.data.FormData
-        FormData.Tags = templeTags
-        this.setData({
-            FormData: FormData,
-            checkbox: templeCheckbox,
-            displayTags: templeTags.join(','),
-            modalName: null
-        })
-    },
+    
 
     // 选择弹窗
     ChooseLpCheckbox(e) {
         console.log('3.ChooseCheckbox')
         let strArray = []
         let templeTags = this.data.templeTags
-        let templeCheckbox = this.data.templeCheckbox
+        let templeCheckbox = this.data.templeLpCheckbox
 
         console.log('templeCheckbox', templeCheckbox[0].checked)
 
@@ -634,11 +619,98 @@ Page({
         // 存在临时的变量，点击确认后再保存显示
         this.setData({
             templeTags: strArray,
-            templeCheckbox: templeCheckbox
+          templeLpCheckbox: templeCheckbox
         })
 
     },
 
+  ChooseXpCheckbox(e){
+    let strArray = []
+    let templeTags = this.data.templeXqTags
+    let templeCheckbox = this.data.templeXqCheckbox
+
+    console.log('templeCheckbox', templeCheckbox[0].checked)
+
+    let values = e.currentTarget.dataset.value
+    let name = e.currentTarget.dataset.name
+
+    console.log('values', values, 'name', name, templeTags.includes(name))
+
+    // 只能选4个标签
+    if (templeTags.length < 3) {
+      // 修改checkbox的显示
+      for (let i = 0; i < templeCheckbox.length; i++) {
+        if (templeCheckbox[i].value == values) {
+          templeCheckbox[i].checked = !templeCheckbox[i].checked;
+          break;
+        }
+      }
+    } else if (templeTags.length >= 3) {
+      // 超过四个标签后，只能取消，不能继续选
+      if (templeTags.includes(name)) {
+        // 修改checkbox的显示
+        for (let i = 0; i < templeCheckbox.length; i++) {
+          if (templeCheckbox[i].value == values) {
+            templeCheckbox[i].checked = !templeCheckbox[i].checked;
+            break;
+          }
+        }
+      } else {
+        wx.showToast({
+          title: '最多只能选3个',
+          icon: 'none'
+        })
+      }
+    }
+
+    // 实时显示
+    for (let i = 0; i < templeCheckbox.length; i++) {
+      if (templeCheckbox[i].checked) {
+        strArray.push(templeCheckbox[i].name)
+      }
+    }
+
+    console.log(strArray, templeCheckbox)
+
+    // 存在临时的变量，点击确认后再保存显示
+    this.setData({
+      templeXqTags: strArray,
+      templeXqCheckbox: templeCheckbox
+    })
+  },
+
+
+
+
+  // 点击确认后保存显示confirm
+  lpConfirm(e) {
+    console.log('2.Confirm')
+    let templeTags = this.data.templeTags
+    let templeCheckbox = this.data.templeCheckbox
+    let FormData = this.data.FormData
+    FormData.LPTags = templeTags
+    this.setData({
+      FormData: FormData,
+      checkbox: templeCheckbox,
+      displayTags: templeTags.join(','),
+      modalName: null
+    })
+  },
+
+  // 点击确认后保存显示confirm
+  xqConfirm(e) {
+    console.log('2.Confirm')
+    let templeTags = this.data.templeXqTags
+    let templeCheckbox = this.data.templeXqCheckbox
+    let FormData = this.data.FormData
+    FormData.XQTags = templeTags
+    this.setData({
+      FormData: FormData,
+      checkbox: templeCheckbox,
+      xqdisplayTags: templeTags.join(','),
+      modalName: null
+    })
+  },
     // Tab切换
     ChangeTab(e) {
         wx.showToast({
@@ -815,8 +887,8 @@ Page({
               area: FormData.area,
               builtArea: FormData.builtArea,
               car: FormData.car,
-              coveredArea: FormData.price,
-              developers: FormData.type,
+              coveredArea: FormData.coveredArea,
+              developers: FormData.developers,
               floor: FormData.floor,
               greenRate: FormData.greenRate,
               imageUrls: this.data.fileIds3,
@@ -826,7 +898,8 @@ Page({
               openDate:this.data.date,
               price:FormData.price,
               propertyCompany:FormData.propertyCompany,
-              tags:FormData.Tags,
+              LPtags: FormData.LPTags,
+              XQtags: FormData.XQTags,
               txtUrl:this.data.txtUrl,
               type:FormData.type,
               urls:this.data.fileIds2,

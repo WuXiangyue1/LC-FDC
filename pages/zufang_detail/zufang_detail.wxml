@@ -101,7 +101,7 @@
 	<text class='clickmap' style='font-size:24rpx;'>(点地图)</text>
 	<view class='ditu'>
 		<!-- map.wxml -->
-		<image bindtap='getLocation' src='{{information.mapUrl}}'></image>
+		<image mode="aspectFill" bindtap='getLocation' src='{{information.mapUrl}}'></image>
 	</view>
 </view>
 <!--房源数据推荐位置-->

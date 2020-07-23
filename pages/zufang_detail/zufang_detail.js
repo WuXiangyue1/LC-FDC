@@ -244,7 +244,7 @@ Page({
     var me = this;
     return {
       title: '爱尚房',
-      path: "pages/index1/index1"
+      path: "pages/getPhone/getPhone"
     }
   }
 })

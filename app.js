@@ -3,7 +3,7 @@ App({
   onLaunch: function () {
     //云开发环境初始化
     wx.cloud.init({
-      env:"lc-123",
+      env:"lc-12",
       traceUser: true,
     })
     //this.getToken()
@@ -36,13 +36,17 @@ App({
 
   },
 
-  getToken(){
-    wx.reLaunch({
-      url: '/pages/getPhone/getPhone'		//无token跳转到登录页
-    })
-    
-  },
   globalData: {
     userInfo: null
+  },
+  setGlobalPhone: function (phone) {
+    wx.setStorageSync("phone", phone)
+  },
+  getGlobalPhone: function () {
+    return wx.getStorageSync("phone");
+  },
+  removeStorageSync:function(){
+    wx.removeStorageSync("phone");
   }
+ 
 })
